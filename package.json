@@ -12,7 +12,7 @@
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "dev": "vite",
     "demo": "vite --mode demo",
-    "build:demo": "vite build --mode demo",
+    "build:demo": "vite build --config vite.demo.config.mjs",
     "build-watch": "vite build --watch",
     "type-check": "vue-tsc --noEmit",
     "prepublishOnly": "npm run build"

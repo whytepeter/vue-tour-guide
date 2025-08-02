@@ -19,11 +19,16 @@ export default defineConfig(({ command, mode }) => {
             main: resolve(__dirname, "index.html"),
           },
         },
+        target: "esnext",
+        minify: "esbuild",
       },
       resolve: {
         alias: {
           "@": resolve(__dirname, "src"),
         },
+      },
+      optimizeDeps: {
+        include: ["vue"],
       },
     };
   }
