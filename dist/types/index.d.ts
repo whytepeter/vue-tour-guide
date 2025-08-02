@@ -11,9 +11,9 @@ export interface TourGuideStep {
     title: string;
     /** Optional description content shown in the tooltip body */
     content?: string;
-    /** CSS selector or data-tour-guide attribute to target the element */
+    /** CSS selector, class, id, or data attribute to target the element */
     target: string;
-    /** CSS selector or data-tour-guide attribute for tooltip positioning (optional) */
+    /** CSS selector, class, id, or data attribute for tooltip positioning (optional) */
     tooltipTarget?: string;
     /** Position of tooltip relative to target element */
     direction?: "top" | "bottom" | "left" | "right";

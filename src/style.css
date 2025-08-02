@@ -47,46 +47,6 @@
 }
 
 /* 
- * Smooth transitions for tour guide elements
- */
-.tour-guide-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 
- * Animation utilities for tour guide tooltips
- */
-@keyframes tour-guide-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes tour-guide-fade-out {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-.tour-guide-fade-in {
-  animation: tour-guide-fade-in 0.2s ease-out forwards;
-}
-
-.tour-guide-fade-out {
-  animation: tour-guide-fade-out 0.15s ease-in forwards;
-}
-
-/* 
  * Accessibility improvements
  */
 .tour-guide-active {
@@ -114,15 +74,6 @@
  * High contrast mode support
  */
 @media (prefers-contrast: high) {
-  .tour-guide-active .bg-\[\\#101828\] {
-    background-color: #000000;
-    border: 2px solid #ffffff;
-  }
-  
-  .tour-guide-active .text-white {
-    color: #ffffff;
-  }
-  
   .tour-guide-active [data-tour-guide-interactive="true"] {
     outline: 3px solid #ffffff;
   }
@@ -132,38 +83,8 @@
  * Reduced motion support
  */
 @media (prefers-reduced-motion: reduce) {
-  .tour-guide-transition,
-  .tour-guide-fade-in,
-  .tour-guide-fade-out {
-    animation: none;
-    transition: none;
-  }
-  
   .animate-in {
     animation: none;
-  }
-}
-
-/* 
- * Dark mode support for better integration
- */
-@media (prefers-color-scheme: dark) {
-  .tour-guide-overlay {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-}
-
-/* 
- * Mobile-specific adjustments
- */
-@media (max-width: 768px) {
-  .w-\[18rem\] {
-    width: calc(100vw - 2rem);
-    max-width: 18rem;
-  }
-  
-  .tour-guide-active .fixed {
-    position: fixed;
   }
 }
 
