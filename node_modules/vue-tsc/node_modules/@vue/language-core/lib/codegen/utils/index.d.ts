@@ -1,0 +1,10 @@
+import type * as CompilerDOM from '@vue/compiler-dom';
+import type * as ts from 'typescript';
+import type { Code, SfcBlock, VueCodeInformation } from '../../types';
+export declare const newLine = "\n";
+export declare const endOfLine = ";\n";
+export declare const combineLastMapping: VueCodeInformation;
+export declare const identifierRegex: RegExp;
+export declare function normalizeAttributeValue(node: CompilerDOM.TextNode): [string, number];
+export declare function createTsAst(ts: typeof import('typescript'), inlineTsAsts: Map<string, ts.SourceFile> | undefined, text: string): ts.SourceFile;
+export declare function generateSfcBlockSection(block: SfcBlock, start: number, end: number, features: VueCodeInformation): Code;

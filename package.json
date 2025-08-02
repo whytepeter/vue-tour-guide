@@ -1,0 +1,56 @@
+{
+  "name": "vue-tour-guide",
+  "version": "1.0.0",
+  "description": "A comprehensive Vue 3 tour guide library with TypeScript support for Vue and Nuxt applications",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "dev": "vite",
+    "demo": "vite --port 3000",
+    "build-watch": "vite build --watch",
+    "type-check": "vue-tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "nuxt",
+    "tour",
+    "guide",
+    "tooltip",
+    "onboarding",
+    "tutorial",
+    "walkthrough",
+    "typescript"
+  ],
+  "author": "Peter Whyte <peteremmanuelwhyte@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whytepeter/vue-tour-guide.git"
+  },
+  "bugs": {
+    "url": "https://github.com/whytepeter/vue-tour-guide/issues"
+  },
+  "homepage": "https://github.com/whytepeter/vue-tour-guide#readme",
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.6",
+    "vite-plugin-dts": "^4.5.4",
+    "vue": "^3.5.18",
+    "vue-tsc": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

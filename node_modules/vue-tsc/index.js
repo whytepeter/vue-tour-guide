@@ -1,0 +1,40 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.run = run;
+const runTsc_1 = require("@volar/typescript/lib/quickstart/runTsc");
+const vue = require("@vue/language-core");
+const windowsPathReg = /\\/g;
+function run(tscPath = require.resolve('typescript/lib/tsc')) {
+    let runExtensions = ['.vue'];
+    let extensionsChangedException;
+    const main = () => (0, runTsc_1.runTsc)(tscPath, runExtensions, (ts, options) => {
+        const { configFilePath } = options.options;
+        const vueOptions = typeof configFilePath === 'string'
+            ? vue.createParsedCommandLine(ts, ts.sys, configFilePath.replace(windowsPathReg, '/')).vueOptions
+            : vue.createParsedCommandLineByJson(ts, ts.sys, (options.host ?? ts.sys).getCurrentDirectory(), {})
+                .vueOptions;
+        vue.writeGlobalTypes(vueOptions, ts.sys.writeFile);
+        const allExtensions = vue.getAllExtensions(vueOptions);
+        if (runExtensions.length === allExtensions.length
+            && runExtensions.every(ext => allExtensions.includes(ext))) {
+            const vueLanguagePlugin = vue.createVueLanguagePlugin(ts, options.options, vueOptions, id => id);
+            return { languagePlugins: [vueLanguagePlugin] };
+        }
+        else {
+            runExtensions = allExtensions;
+            throw extensionsChangedException = new Error('extensions changed');
+        }
+    });
+    try {
+        return main();
+    }
+    catch (err) {
+        if (err === extensionsChangedException) {
+            return main();
+        }
+        else {
+            throw err;
+        }
+    }
+}
+//# sourceMappingURL=index.js.map

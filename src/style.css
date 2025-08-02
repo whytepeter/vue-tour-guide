@@ -1,0 +1,180 @@
+/* Import Tailwind CSS from CDN */
+@import url('https://cdn.tailwindcss.com');
+
+/* Tour Guide Global Styles */
+
+/* 
+ * Global interaction blocking when tour guide is active
+ * This prevents all interactions except for marked interactive elements
+ */
+.tour-guide-active {
+  /* Prevent all pointer events on the body */
+  pointer-events: none;
+}
+
+/* Tour Guide styles - disable all pointer events when tour guide is active */
+.tour-guide-active * {
+  pointer-events: none !important;
+}
+
+/* Re-enable pointer events for highlighted element and tooltip */
+.tour-guide-active [data-tour-guide-interactive] {
+  pointer-events: auto !important;
+}
+
+.tour-guide-active [data-tour-guide-interactive] * {
+  pointer-events: auto !important;
+}
+
+/* 
+ * Legacy selector support for data-tour-guide-interactive="true"
+ * This ensures compatibility with the specific attribute value format
+ */
+.tour-guide-active [data-tour-guide-interactive="true"] {
+  pointer-events: auto !important;
+}
+
+.tour-guide-active [data-tour-guide-interactive="true"] * {
+  pointer-events: auto !important;
+}
+
+/* 
+ * Ensure tooltips and overlays are always interactive
+ */
+.tour-guide-active .z-\[35\],
+.tour-guide-active .z-\[70\] {
+  pointer-events: auto;
+}
+
+/* 
+ * Smooth transitions for tour guide elements
+ */
+.tour-guide-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 
+ * Animation utilities for tour guide tooltips
+ */
+@keyframes tour-guide-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tour-guide-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.tour-guide-fade-in {
+  animation: tour-guide-fade-in 0.2s ease-out forwards;
+}
+
+.tour-guide-fade-out {
+  animation: tour-guide-fade-out 0.15s ease-in forwards;
+}
+
+/* 
+ * Accessibility improvements
+ */
+.tour-guide-active {
+  /* Ensure screen readers can access interactive elements */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.tour-guide-active [data-tour-guide-interactive="true"] {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  user-select: auto;
+}
+
+/* 
+ * Focus management for tour guide elements
+ */
+.tour-guide-active [data-tour-guide-interactive="true"]:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 
+ * High contrast mode support
+ */
+@media (prefers-contrast: high) {
+  .tour-guide-active .bg-\[\\#101828\] {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+  }
+  
+  .tour-guide-active .text-white {
+    color: #ffffff;
+  }
+  
+  .tour-guide-active [data-tour-guide-interactive="true"] {
+    outline: 3px solid #ffffff;
+  }
+}
+
+/* 
+ * Reduced motion support
+ */
+@media (prefers-reduced-motion: reduce) {
+  .tour-guide-transition,
+  .tour-guide-fade-in,
+  .tour-guide-fade-out {
+    animation: none;
+    transition: none;
+  }
+  
+  .animate-in {
+    animation: none;
+  }
+}
+
+/* 
+ * Dark mode support for better integration
+ */
+@media (prefers-color-scheme: dark) {
+  .tour-guide-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* 
+ * Mobile-specific adjustments
+ */
+@media (max-width: 768px) {
+  .w-\[18rem\] {
+    width: calc(100vw - 2rem);
+    max-width: 18rem;
+  }
+  
+  .tour-guide-active .fixed {
+    position: fixed;
+  }
+}
+
+/* 
+ * Print styles - hide tour guide elements when printing
+ */
+@media print {
+  .tour-guide-active,
+  .z-\[35\],
+  .z-\[70\],
+  [data-tour-guide-interactive] {
+    display: none !important;
+  }
+}

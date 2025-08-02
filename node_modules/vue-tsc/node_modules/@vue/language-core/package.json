@@ -1,0 +1,41 @@
+{
+	"name": "@vue/language-core",
+	"version": "3.0.5",
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"sideEffects": false,
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vuejs/language-tools.git",
+		"directory": "packages/language-core"
+	},
+	"dependencies": {
+		"@volar/language-core": "2.4.22",
+		"@vue/compiler-dom": "^3.5.0",
+		"@vue/compiler-vue2": "^2.7.16",
+		"@vue/shared": "^3.5.0",
+		"alien-signals": "^2.0.5",
+		"muggle-string": "^0.4.1",
+		"path-browserify": "^1.0.1",
+		"picomatch": "^4.0.2"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.4",
+		"@types/path-browserify": "^1.0.1",
+		"@types/picomatch": "^4.0.0",
+		"@volar/typescript": "2.4.22",
+		"@vue/compiler-sfc": "^3.5.0"
+	},
+	"peerDependencies": {
+		"typescript": "*"
+	},
+	"peerDependenciesMeta": {
+		"typescript": {
+			"optional": true
+		}
+	},
+	"gitHead": "036b6b1882179d35586e16f2a5cba5150e5d18e6"
+}
