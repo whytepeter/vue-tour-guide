@@ -23,8 +23,6 @@ export interface TourGuideStep {
     offsetY?: number;
     /** Border radius for the highlight cut-out (pixels, default: 8) */
     radius?: number;
-    /** Auto-scroll target into view before highlighting (default: false) */
-    scrollToView?: boolean;
     /** Whether to show the action button */
     showAction?: boolean;
     /** Custom label for skip button */
@@ -35,23 +33,25 @@ export interface TourGuideStep {
     prevLabel?: string;
     /** Custom label for finish button */
     finishLabel?: string;
-    backgroundColor?: string;
-    textColor?: string;
-    borderRadius?: string;
-    padding?: string;
-    maxWidth?: string;
-    boxShadow?: string;
-    buttonBackgroundColor?: string;
-    buttonTextColor?: string;
-    buttonHoverColor?: string;
-    skipButtonColor?: string;
-    skipButtonHoverColor?: string;
-    progressActiveColor?: string;
-    progressInactiveColor?: string;
-    tooltipClass?: string;
-    headerClass?: string;
-    contentClass?: string;
-    actionsClass?: string;
+    tooltip?: {
+        backgroundColor?: string;
+        textColor?: string;
+        borderRadius?: string;
+        padding?: string;
+        maxWidth?: string;
+        boxShadow?: string;
+        buttonBackgroundColor?: string;
+        buttonTextColor?: string;
+        buttonHoverColor?: string;
+        skipButtonColor?: string;
+        skipButtonHoverColor?: string;
+        progressActiveColor?: string;
+        progressInactiveColor?: string;
+        tooltipClass?: string;
+        headerClass?: string;
+        contentClass?: string;
+        actionsClass?: string;
+    };
     /** Hook called before step becomes visible (async supported) */
     beforeShow?: () => void | Promise<void>;
     /** Hook called after step becomes visible */

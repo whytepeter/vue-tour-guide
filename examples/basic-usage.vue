@@ -159,7 +159,7 @@ const tourSteps: TourGuideStep[] = [
     title: "Welcome to Vue Tour Guide!",
     content:
       "This is your first tour step. Let's explore the main features of this demo.",
-    target: "welcome-card",
+    target: "welcome-card", // Using data-tour-guide attribute
     direction: "bottom",
     scrollToView: true,
     showAction: true,
@@ -175,7 +175,7 @@ const tourSteps: TourGuideStep[] = [
     title: "Amazing Features",
     content:
       "Here you can see all the powerful features that Vue Tour Guide offers.",
-    target: "feature-list",
+    target: "feature-list", // Using data-tour-guide attribute
     direction: "right",
     showAction: true,
     offsetX: 10,
@@ -184,7 +184,7 @@ const tourSteps: TourGuideStep[] = [
     id: "actions",
     title: "Take Action",
     content: "Use these buttons to control your tour experience.",
-    target: "action-button",
+    target: "action-button", // Using data-tour-guide attribute
     direction: "left",
     showAction: true,
     radius: 12,
@@ -193,7 +193,7 @@ const tourSteps: TourGuideStep[] = [
     id: "settings",
     title: "Customize Settings",
     content: "Configure your preferences here to personalize your experience.",
-    target: "settings-panel",
+    target: "settings-panel", // Using data-tour-guide attribute
     direction: "top",
     showAction: true,
     prevLabel: "Back to Actions",
@@ -203,8 +203,8 @@ const tourSteps: TourGuideStep[] = [
     title: "Advanced Tooltip Positioning",
     content:
       "This step highlights the notification checkbox but positions the tooltip relative to the save button below. This demonstrates separate target and tooltip positioning!",
-    target: "notification-checkbox", // Element to highlight
-    tooltipTarget: "tooltip-anchor", // Element for tooltip positioning
+    target: "notification-checkbox", // Element to highlight (data-tour-guide attribute)
+    tooltipTarget: "tooltip-anchor", // Element for tooltip positioning (class selector)
     direction: "left",
     showAction: true,
     nextLabel: "Customize Style",
@@ -214,25 +214,27 @@ const tourSteps: TourGuideStep[] = [
     title: "🎨 Custom Styled Tooltip",
     content:
       "This tooltip demonstrates custom styling! Notice the gradient background, custom colors, and rounded corners. Each tooltip can have its own unique appearance.",
-    target: "tooltip-anchor",
+    target: "tooltip-anchor", // Using class selector
     direction: "top",
     showAction: true,
     finishLabel: "All Done!",
     // Custom styling for this step
-    backgroundColor: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    textColor: "#ffffff",
-    borderRadius: "1rem",
-    padding: "1rem",
-    maxWidth: "20rem",
-    boxShadow:
-      "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)",
-    buttonBackgroundColor: "#4f46e5",
-    buttonTextColor: "#ffffff",
-    buttonHoverColor: "#6366f1",
-    skipButtonColor: "#e5e7eb",
-    skipButtonHoverColor: "#ffffff",
-    progressActiveColor: "#10b981",
-    progressInactiveColor: "rgba(255, 255, 255, 0.3)",
+    tooltip: {
+      backgroundColor: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      textColor: "#ffffff",
+      borderRadius: "1rem",
+      padding: "1rem",
+      maxWidth: "20rem",
+      boxShadow:
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)",
+      buttonBackgroundColor: "#4f46e5",
+      buttonTextColor: "#ffffff",
+      buttonHoverColor: "#6366f1",
+      skipButtonColor: "#e5e7eb",
+      skipButtonHoverColor: "#ffffff",
+      progressActiveColor: "#10b981",
+      progressInactiveColor: "rgba(255, 255, 255, 0.3)",
+    },
   },
 ];
 

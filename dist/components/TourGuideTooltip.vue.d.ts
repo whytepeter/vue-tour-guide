@@ -14,11 +14,13 @@ interface Props {
     nextLabel?: string;
     prevLabel?: string;
     finishLabel?: string;
+    arrowOffset?: number;
     backgroundColor?: string;
     textColor?: string;
     borderRadius?: string;
     padding?: string;
     maxWidth?: string;
+    minWidth?: string;
     boxShadow?: string;
     buttonBackgroundColor?: string;
     buttonTextColor?: string;
@@ -44,12 +46,11 @@ declare function __VLS_template(): {
             skipLabel: string;
             onClose: () => void;
         }): any;
-        content?(_: {
+        default?(_: {
             content: string | undefined;
             currentStep: number;
             totalSteps: number;
         }): any;
-        default?(_: {}): any;
         progress?(_: {
             currentStep: number;
             totalSteps: number;
@@ -90,11 +91,13 @@ declare const __VLS_component: import('vue').DefineComponent<Props, {}, {}, {}, 
     nextLabel: string;
     prevLabel: string;
     finishLabel: string;
+    arrowOffset: number;
     backgroundColor: string;
     textColor: string;
     borderRadius: string;
     padding: string;
     maxWidth: string;
+    minWidth: string;
     boxShadow: string;
     buttonBackgroundColor: string;
     buttonTextColor: string;

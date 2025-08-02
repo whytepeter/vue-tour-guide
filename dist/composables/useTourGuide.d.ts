@@ -7,6 +7,7 @@ export declare const useTourGuide: () => {
     };
     startTourGuide: (_stepId?: string) => void;
     completeStep: (stepId: string) => void;
+    updateCurrentStep: (stepIndex: number) => void;
     finishTourGuide: () => void;
     resetTourGuide: () => void;
     isStepCompleted: (stepId: string) => boolean;

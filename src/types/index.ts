@@ -14,10 +14,10 @@ export interface TourGuideStep {
     /** Optional description content shown in the tooltip body */
     content?: string;
 
-    /** CSS selector or data-tour-guide attribute to target the element */
+    /** CSS selector, class, id, or data attribute to target the element */
     target: string;
 
-    /** CSS selector or data-tour-guide attribute for tooltip positioning (optional) */
+    /** CSS selector, class, id, or data attribute for tooltip positioning (optional) */
     tooltipTarget?: string;
 
     /** Position of tooltip relative to target element */
@@ -49,23 +49,25 @@ export interface TourGuideStep {
     finishLabel?: string;
 
     // Tooltip customization props (can be overridden per step)
-    backgroundColor?: string;
-    textColor?: string;
-    borderRadius?: string;
-    padding?: string;
-    maxWidth?: string;
-    boxShadow?: string;
-    buttonBackgroundColor?: string;
-    buttonTextColor?: string;
-    buttonHoverColor?: string;
-    skipButtonColor?: string;
-    skipButtonHoverColor?: string;
-    progressActiveColor?: string;
-    progressInactiveColor?: string;
-    tooltipClass?: string;
-    headerClass?: string;
-    contentClass?: string;
-    actionsClass?: string;
+    tooltip?: {
+        backgroundColor?: string;
+        textColor?: string;
+        borderRadius?: string;
+        padding?: string;
+        maxWidth?: string;
+        boxShadow?: string;
+        buttonBackgroundColor?: string;
+        buttonTextColor?: string;
+        buttonHoverColor?: string;
+        skipButtonColor?: string;
+        skipButtonHoverColor?: string;
+        progressActiveColor?: string;
+        progressInactiveColor?: string;
+        tooltipClass?: string;
+        headerClass?: string;
+        contentClass?: string;
+        actionsClass?: string;
+    }
 
     /** Hook called before step becomes visible (async supported) */
     beforeShow?: () => void | Promise<void>;

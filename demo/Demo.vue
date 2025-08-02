@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-900 dark:bg-gray-900 p-4 sm:p-8 transition-colors duration-300"
+    class="min-h-screen bg-background dark:bg-gray-900 p-4 sm:p-8 transition-colors duration-300"
   >
     <!-- Floating GitHub link -->
     <a
@@ -43,7 +43,7 @@
     <div class="flex justify-center mb-12">
       <button
         @click="startTour"
-        class="floating-btn bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center gap-3"
+        class="floating-btn bg-[#4fc08d] text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center gap-3"
       >
         <i class="fa-regular fa-compass animate-pulse-slow"></i>
         Start Interactive Tour
@@ -412,26 +412,25 @@ const tourSteps: TourGuideStep[] = [
     title: "🎨 Custom Styled Tooltip",
     content:
       "This tooltip demonstrates custom styling! Notice the gradient background, custom colors, and rounded corners. Each tooltip can have its own unique appearance.",
-    // target: "tooltip-anchor",
-    target: "settings-panel",
-    tooltipTarget: "tooltip-anchor",
+    target: "settings-panel", // Using data-tour-guide attribute
+    tooltipTarget: "tooltip-anchor", // Using class selector
     direction: "top",
     showAction: true,
     finishLabel: "Awesome! 🎉",
     // Custom styling for this step
-
-    textColor: "#ffffff",
-    borderRadius: "1rem",
-
-    boxShadow:
-      "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)",
-    buttonBackgroundColor: "#4f46e5",
-    buttonTextColor: "#ffffff",
-    buttonHoverColor: "#6366f1",
-    skipButtonColor: "#e5e7eb",
-    skipButtonHoverColor: "#ffffff",
-    progressActiveColor: "#10b981",
-    progressInactiveColor: "rgba(255, 255, 255, 0.3)",
+    tooltip: {
+      textColor: "#ffffff",
+      borderRadius: "1rem",
+      boxShadow:
+        "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04)",
+      buttonBackgroundColor: "#4f46e5",
+      buttonTextColor: "#ffffff",
+      buttonHoverColor: "#6366f1",
+      skipButtonColor: "#e5e7eb",
+      skipButtonHoverColor: "#ffffff",
+      progressActiveColor: "#10b981",
+      progressInactiveColor: "rgba(255, 255, 255, 0.3)",
+    },
   },
   {
     id: "status",

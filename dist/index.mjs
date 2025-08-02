@@ -1,11 +1,14 @@
-import { defineComponent as Q, useCssVars as ae, computed as v, createElementBlock as g, createCommentVNode as L, openBlock as f, normalizeStyle as x, normalizeClass as G, createElementVNode as E, renderSlot as R, toDisplayString as z, Fragment as K, createTextVNode as re, renderList as se, ref as T, onMounted as Z, onUnmounted as ne, watch as O, readonly as V, createBlock as ie, Teleport as ue, createVNode as ve, createSlots as ce, withCtx as de, nextTick as W, reactive as pe } from "vue";
-const fe = {
-  class: "relative space-y-2",
+import { defineComponent as ce, useCssVars as Te, computed as $, createElementBlock as w, createCommentVNode as M, openBlock as g, normalizeStyle as W, normalizeClass as D, createElementVNode as X, renderSlot as C, toDisplayString as Y, Fragment as se, createTextVNode as Le, renderList as $e, reactive as Pe, onMounted as fe, readonly as re, ref as y, onUnmounted as xe, watch as te, nextTick as q, createBlock as Be, Teleport as Ae, createVNode as He, createSlots as Ie, withCtx as N, normalizeProps as V, guardReactiveProps as F } from "vue";
+const Ge = {
+  class: "relative",
   style: { padding: "0" }
-}, be = {
+}, Oe = {
   key: 0,
-  class: "font-medium leading-tight"
-}, he = { class: "flex items-center gap-2" }, ge = { class: "flex items-center gap-2" }, me = /* @__PURE__ */ Q({
+  class: "font-medium leading-tight flex-1 min-w-0"
+}, Ee = {
+  key: 1,
+  class: "flex items-center flex-1"
+}, Me = { class: "flex items-center gap-1 pr-2 py-1 rounded-full" }, We = { class: "flex items-center gap-1.5 flex-shrink-0" }, Re = /* @__PURE__ */ ce({
   __name: "TourGuideTooltip",
   props: {
     visible: { type: Boolean, default: !0 },
@@ -23,11 +26,13 @@ const fe = {
     nextLabel: { default: "Next" },
     prevLabel: { default: "Previous" },
     finishLabel: { default: "Finish" },
+    arrowOffset: { default: 0 },
     backgroundColor: { default: "#101828" },
     textColor: { default: "#ffffff" },
     borderRadius: { default: "0.75rem" },
     padding: { default: "0.75rem" },
-    maxWidth: { default: "18rem" },
+    maxWidth: { default: "20rem" },
+    minWidth: { default: "16rem" },
     boxShadow: { default: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)" },
     buttonBackgroundColor: { default: "#374151" },
     buttonTextColor: { default: "#ffffff" },
@@ -35,180 +40,236 @@ const fe = {
     skipButtonColor: { default: "#ffffff" },
     skipButtonHoverColor: { default: "rgba(255, 255, 255, 0.8)" },
     progressActiveColor: { default: "#60A5FA" },
-    progressInactiveColor: { default: "rgba(255, 255, 255, 0.2)" },
+    progressInactiveColor: { default: "rgba(255, 255, 255, 0.3)" },
     tooltipClass: {},
     headerClass: {},
     contentClass: {},
     actionsClass: {}
   },
   emits: ["close", "next", "previous"],
-  setup(y) {
-    ae((t) => ({
-      "8d8bf0a4": l.skipButtonHoverColor,
-      "728f070f": l.buttonHoverColor
+  setup(x) {
+    Te((o) => ({
+      ac36b108: s.skipButtonHoverColor,
+      "522dbddd": s.buttonHoverColor
     }));
-    const l = y, S = v(() => l.currentStep >= l.totalSteps), u = v(() => ({
-      backgroundColor: l.backgroundColor,
-      color: l.textColor,
-      borderRadius: l.borderRadius,
-      padding: l.padding,
-      maxWidth: l.maxWidth,
-      boxShadow: l.boxShadow
-    })), P = v(() => ({
-      backgroundColor: l.backgroundColor
-    })), C = v(() => ({
-      backgroundColor: l.buttonBackgroundColor,
-      color: l.buttonTextColor,
-      "--hover-bg": l.buttonHoverColor
-    })), m = v(() => ({
-      color: l.skipButtonColor,
-      "--hover-color": l.skipButtonHoverColor
-    })), n = v(() => ({
-      backgroundColor: l.progressActiveColor
-    })), i = v(() => ({
-      backgroundColor: l.progressInactiveColor
-    })), o = v(() => {
-      switch (l.direction) {
-        case "top":
-          return "bottom-full mb-3";
-        case "bottom":
-          return "top-full mt-3";
-        case "left":
-          return "right-full mr-3 top-1/2 -translate-y-1/2";
-        case "right":
-          return "left-full ml-3 top-1/2 -translate-y-1/2";
-        default:
-          return "top-full mt-3";
+    const s = x, B = $(() => s.currentStep >= s.totalSteps), v = $(() => (o) => {
+      const p = o <= s.currentStep, n = Math.abs(o - s.currentStep);
+      if (p)
+        return {
+          backgroundColor: s.progressActiveColor,
+          opacity: 1
+        };
+      {
+        const i = Math.max(0.2, 1 - n * 0.3);
+        return {
+          backgroundColor: s.progressInactiveColor,
+          opacity: i
+        };
       }
-    }), b = v(() => {
-      switch (l.direction) {
+    }), R = $(() => {
+      const o = Math.max(
+        (s.title?.length || 0) * 7 + 50,
+        // title width + padding
+        (s.content?.length || 0) * 5 + 50,
+        // content width + padding
+        250
+        // minimum width
+      ), p = Math.min(o, 350), n = {};
+      return s.backgroundColor?.includes("gradient") ? n.background = s.backgroundColor : n.backgroundColor = s.backgroundColor, {
+        ...n,
+        color: s.textColor,
+        borderRadius: s.borderRadius,
+        padding: s.padding,
+        width: `${p}px`,
+        minWidth: s.minWidth,
+        maxWidth: s.maxWidth,
+        boxShadow: s.boxShadow
+      };
+    }), H = $(() => {
+      switch (s.direction) {
         case "top":
-          return "top-full left-1/2 -translate-x-1/2 -mt-1.5";
+          return "arrow-top";
         case "bottom":
-          return "bottom-full left-1/2 -translate-x-1/2 -mb-1.5";
+          return "arrow-bottom";
         case "left":
-          return "left-full top-1/2 -translate-y-1/2 -ml-1.5";
+          return "arrow-left";
         case "right":
-          return "right-full top-1/2 -translate-y-1/2 -mr-1.5";
+          return "arrow-right";
         default:
-          return "bottom-full left-1/2 -translate-x-1/2 -mb-1.5";
+          return "arrow-bottom";
       }
-    }), F = v(() => {
-      const t = {};
-      return l.offsetX !== 0 && (t.left = `${l.offsetX}px`), l.offsetY !== 0 && (t.top = `${l.offsetY}px`), t;
-    }), k = v(() => (l.title?.length || 0) + (l.content?.length || 0) > 30 ? l.maxWidth : `max-w-[${l.maxWidth}]`);
-    return (t, h) => t.visible ? (f(), g("div", {
+    }), k = $(() => {
+      const o = {};
+      if (s.backgroundColor?.includes("gradient") ? o.background = s.backgroundColor : o.backgroundColor = s.backgroundColor, s.direction === "top" || s.direction === "bottom") {
+        if (s.arrowOffset !== 0) {
+          const p = Math.max(-50, Math.min(50, s.arrowOffset));
+          o.transform = `translateX(calc(-50% + ${p}px)) rotate(45deg)`;
+        }
+      } else if ((s.direction === "left" || s.direction === "right") && s.arrowOffset !== 0) {
+        const p = Math.max(-50, Math.min(50, s.arrowOffset));
+        o.transform = `translateY(calc(-50% + ${p}px)) rotate(45deg)`;
+      }
+      return o;
+    }), I = $(() => ({
+      backgroundColor: s.buttonBackgroundColor,
+      color: s.buttonTextColor,
+      "--hover-bg": s.buttonHoverColor
+    })), f = $(() => ({
+      color: s.skipButtonColor,
+      "--hover-color": s.skipButtonHoverColor
+    }));
+    return (o, p) => o.visible ? (g(), w("div", {
       key: 0,
-      class: G([
-        "absolute z-50 text-sm",
+      class: D([
+        "relative z-50 text-sm",
         "animate-in fade-in-0 zoom-in-95 duration-200",
-        o.value,
-        k.value,
-        l.tooltipClass
+        s.tooltipClass
       ]),
-      style: x({ ...F.value, ...u.value })
+      style: W(R.value)
     }, [
-      E("div", {
-        class: G(["absolute w-3 h-3 rotate-45", b.value]),
-        style: x(P.value)
+      X("div", {
+        class: D(["arrow-base", H.value]),
+        style: W(k.value)
       }, null, 6),
-      E("div", fe, [
-        E("div", {
-          class: G(["flex items-start justify-between gap-4", l.headerClass])
+      X("div", Ge, [
+        X("div", {
+          class: D([
+            "flex items-start justify-between gap-3 mb-2",
+            s.headerClass
+          ])
         }, [
-          R(t.$slots, "header", {
-            title: t.title,
-            currentStep: t.currentStep,
-            totalSteps: t.totalSteps
+          C(o.$slots, "header", {
+            title: o.title,
+            currentStep: o.currentStep,
+            totalSteps: o.totalSteps
           }, () => [
-            t.title ? (f(), g("h3", be, z(t.title), 1)) : L("", !0)
+            o.title ? (g(), w("h3", Oe, Y(o.title), 1)) : M("", !0)
           ], !0),
-          R(t.$slots, "skip-button", {
-            skipLabel: t.skipLabel,
-            onClose: () => t.$emit("close")
+          C(o.$slots, "skip-button", {
+            skipLabel: o.skipLabel,
+            onClose: () => o.$emit("close")
           }, () => [
-            t.showClose || t.currentStep === 1 ? (f(), g("button", {
+            o.showClose || o.currentStep === 1 ? (g(), w("button", {
               key: 0,
               type: "button",
-              onClick: h[0] || (h[0] = (w) => t.$emit("close")),
+              onClick: p[0] || (p[0] = (n) => o.$emit("close")),
               class: "underline text-sm transition-colors flex-shrink-0 custom-skip-btn",
-              style: x(m.value)
-            }, z(t.skipLabel), 5)) : L("", !0)
+              style: W(f.value)
+            }, Y(o.skipLabel), 5)) : M("", !0)
           ], !0)
         ], 2),
-        t.content || t.$slots.default || t.$slots.content ? (f(), g("div", {
+        o.content || o.$slots.default ? (g(), w("div", {
           key: 0,
-          class: G([
-            "opacity-90 font-thin leading-4 break-words",
-            l.contentClass
+          class: D([
+            "opacity-90 font-thin leading-4 break-words mb-3",
+            s.contentClass
           ])
         }, [
-          R(t.$slots, "content", {
-            content: t.content,
-            currentStep: t.currentStep,
-            totalSteps: t.totalSteps
-          }, () => [
-            t.$slots.default ? R(t.$slots, "default", { key: 0 }, void 0, !0) : (f(), g(K, { key: 1 }, [
-              re(z(t.content), 1)
-            ], 64))
-          ], !0)
-        ], 2)) : L("", !0),
-        t.showActions ? (f(), g("div", {
+          o.$slots.default ? C(o.$slots, "default", {
+            key: 0,
+            content: o.content,
+            currentStep: o.currentStep,
+            totalSteps: o.totalSteps
+          }, void 0, !0) : (g(), w(se, { key: 1 }, [
+            Le(Y(o.content) + " " + Y(o.backgroundColor), 1)
+          ], 64))
+        ], 2)) : M("", !0),
+        o.showActions ? (g(), w("div", {
           key: 1,
-          class: G([
-            "flex items-center justify-between gap-3 pt-3",
-            l.actionsClass
-          ])
+          class: D(["flex items-center justify-between gap-2", s.actionsClass])
         }, [
-          R(t.$slots, "progress", {
-            currentStep: t.currentStep,
-            totalSteps: t.totalSteps
-          }, () => [
-            E("div", he, [
-              (f(!0), g(K, null, se(t.totalSteps, (w) => (f(), g("div", {
-                key: w,
-                class: G(["w-2 h-2 rounded-full transition-colors"]),
-                style: x(
-                  w <= t.currentStep ? n.value : i.value
-                )
+          o.$slots.progress ? C(o.$slots, "progress", {
+            key: 0,
+            currentStep: o.currentStep,
+            totalSteps: o.totalSteps
+          }, void 0, !0) : (g(), w("div", Ee, [
+            X("div", Me, [
+              (g(!0), w(se, null, $e(o.totalSteps, (n) => (g(), w("div", {
+                key: n,
+                class: D(["w-1.5 h-1.5 rounded-full transition-all duration-300"]),
+                style: W(v.value(n))
               }, null, 4))), 128))
             ])
-          ], !0),
-          R(t.$slots, "actions", {
-            showPrevious: t.showPrevious,
-            isLastStep: S.value,
-            prevLabel: t.prevLabel,
-            nextLabel: t.nextLabel,
-            finishLabel: t.finishLabel,
-            onPrevious: () => t.$emit("previous"),
-            onNext: () => t.$emit("next")
-          }, () => [
-            E("div", ge, [
-              t.showPrevious ? (f(), g("button", {
+          ])),
+          X("div", We, [
+            o.$slots.actions ? C(o.$slots, "actions", {
+              key: 0,
+              showPrevious: o.showPrevious,
+              isLastStep: B.value,
+              prevLabel: o.prevLabel,
+              nextLabel: o.nextLabel,
+              finishLabel: o.finishLabel,
+              onPrevious: () => o.$emit("previous"),
+              onNext: () => o.$emit("next")
+            }, void 0, !0) : (g(), w(se, { key: 1 }, [
+              o.showPrevious ? (g(), w("button", {
                 key: 0,
                 type: "button",
-                onClick: h[1] || (h[1] = (w) => t.$emit("previous")),
-                class: "text-xs px-2.5 py-1.5 rounded-lg transition-colors flex-shrink-0 custom-action-btn",
-                style: x(C.value)
-              }, z(t.prevLabel), 5)) : L("", !0),
-              E("button", {
+                onClick: p[1] || (p[1] = (n) => o.$emit("previous")),
+                class: "text-xs px-2 py-1 rounded-md transition-colors flex-shrink-0 custom-action-btn whitespace-nowrap",
+                style: W(I.value)
+              }, Y(o.prevLabel), 5)) : M("", !0),
+              X("button", {
                 type: "button",
-                onClick: h[2] || (h[2] = (w) => t.$emit("next")),
-                class: "text-xs px-2.5 py-1.5 rounded-lg transition-colors flex-shrink-0 custom-action-btn",
-                style: x(C.value)
-              }, z(S.value ? t.finishLabel : t.nextLabel), 5)
-            ])
-          ], !0)
-        ], 2)) : L("", !0)
+                onClick: p[2] || (p[2] = (n) => o.$emit("next")),
+                class: "text-xs px-2 py-1 rounded-md transition-colors flex-shrink-0 custom-action-btn whitespace-nowrap",
+                style: W(I.value)
+              }, Y(B.value ? o.finishLabel : o.nextLabel), 5)
+            ], 64))
+          ])
+        ], 2)) : M("", !0)
       ])
-    ], 6)) : L("", !0);
+    ], 6)) : M("", !0);
   }
-}), we = (y, l) => {
-  const S = y.__vccOpts || y;
-  for (const [u, P] of l)
-    S[u] = P;
-  return S;
-}, ye = /* @__PURE__ */ we(me, [["__scopeId", "data-v-009a70ab"]]), Ce = /* @__PURE__ */ Q({
+}), ze = (x, s) => {
+  const B = x.__vccOpts || x;
+  for (const [v, R] of s)
+    B[v] = R;
+  return B;
+}, Ne = /* @__PURE__ */ ze(Re, [["__scopeId", "data-v-fbef99d7"]]), c = Pe({
+  isActive: !1,
+  currentStep: 0,
+  completedSteps: [],
+  hasSeenTourGuide: !1
+}), Ve = () => {
+  const x = () => {
+    if (typeof window < "u") {
+      const f = localStorage.getItem("tour-guide-state");
+      if (f) {
+        const o = JSON.parse(f);
+        Object.assign(c, o);
+      }
+    }
+  }, s = () => {
+    typeof window < "u" && localStorage.setItem("tour-guide-state", JSON.stringify(c));
+  }, B = (f) => {
+    c.isActive = !0, c.currentStep = 0, c.completedSteps = [], s();
+  }, v = (f) => {
+    c.completedSteps.includes(f) || (c.completedSteps.push(f), s());
+  }, R = (f) => {
+    c.currentStep = f, s();
+  }, H = () => {
+    c.isActive = !1, c.hasSeenTourGuide = !0, s();
+  }, k = () => {
+    c.isActive = !1, c.currentStep = 0, c.completedSteps = [], c.hasSeenTourGuide = !1, s();
+  }, I = (f) => c.completedSteps.includes(f);
+  return fe(() => {
+    x();
+  }), {
+    // State
+    tourGuideState: re(c),
+    // Actions
+    startTourGuide: B,
+    completeStep: v,
+    updateCurrentStep: R,
+    finishTourGuide: H,
+    resetTourGuide: k,
+    isStepCompleted: I,
+    // Helpers
+    loadTourGuideState: x,
+    saveTourGuideState: s
+  };
+}, De = /* @__PURE__ */ ce({
   __name: "TourManager",
   props: {
     steps: {},
@@ -217,102 +278,178 @@ const fe = {
     allowSkip: { type: Boolean, default: !0 },
     highlightPadding: { default: 4 },
     labels: {},
-    allowInteractions: { type: Boolean, default: !1 }
+    allowInteractions: { type: Boolean, default: !1 },
+    viewportMargin: { default: 16 },
+    scrollToView: { type: Boolean, default: !0 }
   },
   emits: ["start", "complete", "skip", "step-change"],
-  setup(y, { expose: l, emit: S }) {
-    const u = y, P = {
+  setup(x, { expose: s, emit: B }) {
+    const v = x, R = {
       skip: "Skip",
       next: "Next",
       previous: "Previous",
       finish: "Finish"
-    }, C = v(() => ({
-      ...P,
-      ...u.labels
-    })), m = S, n = T(!1), i = T(0), o = T(null), b = T(null), F = T(), k = T(null), t = T(null), h = T(null), w = T(null), e = v(() => u.steps[i.value]), _ = v(() => {
-      if (!o.value || !e.value || !k.value)
+    }, H = $(() => ({
+      ...R,
+      ...v.labels
+    })), k = B, {
+      completeStep: I,
+      finishTourGuide: f,
+      startTourGuide: o,
+      updateCurrentStep: p
+    } = Ve(), n = y(!1), i = y(0), r = y(null), P = y(null), m = y(), z = y(null), j = y(null), S = y({
+      width: 0,
+      height: 0
+    }), ie = y("bottom"), oe = y(0), J = y(null), U = y(null), G = y(null), t = $(() => v.steps[i.value]), he = $(() => {
+      if (!r.value || !t.value || !z.value)
         return {};
-      const a = k.value, r = u.highlightPadding, s = e.value.radius ?? 8, p = a.top - r, $ = a.left - r, B = a.width + r * 2, A = a.height + r * 2;
+      const e = z.value, a = v.highlightPadding, l = t.value.radius ?? 8, u = e.top - a, b = e.left - a, A = e.width + a * 2, d = e.height + a * 2;
       return {
-        top: `${p}px`,
-        left: `${$}px`,
-        width: `${B}px`,
-        height: `${A}px`,
-        borderRadius: `${s}px`,
+        top: `${u}px`,
+        left: `${b}px`,
+        width: `${A}px`,
+        height: `${d}px`,
+        borderRadius: `${l}px`,
         // Massive box-shadow creates the dimming overlay around the cut-out
         boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5)"
       };
-    }), ee = v(() => {
-      if (!e.value) return {};
-      const a = b.value || o.value, r = t.value || k.value;
-      if (!a || !r) return {};
-      const s = r, p = e.value.direction || "bottom", $ = e.value.offsetX || 0, B = e.value.offsetY || 0;
-      e.value.tooltipTarget && process.env.NODE_ENV === "development" && console.log("Tooltip positioning debug:", {
-        stepId: e.value.id,
-        direction: p,
-        tooltipTarget: e.value.tooltipTarget,
-        rect: {
-          top: s.top,
-          left: s.left,
-          width: s.width,
-          height: s.height
+    }), ge = (e) => {
+      const a = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }, l = v.viewportMargin;
+      return {
+        top: e.top - l,
+        bottom: a.height - e.bottom - l,
+        left: e.left - l,
+        right: a.width - e.right - l
+      };
+    }, we = (e, a, l) => {
+      const u = ge(e);
+      if (l && {
+        top: u.top >= a.height,
+        bottom: u.bottom >= a.height,
+        left: u.left >= a.width,
+        right: u.right >= a.width
+      }[l])
+        return l;
+      const b = [
+        {
+          name: "bottom",
+          space: u.bottom,
+          needed: a.height
         },
-        offsetX: $,
-        offsetY: B
-      });
-      let A = 0, H = 0;
-      switch (p) {
+        { name: "top", space: u.top, needed: a.height },
+        { name: "right", space: u.right, needed: a.width },
+        { name: "left", space: u.left, needed: a.width }
+      ], A = b.filter((d) => d.space >= d.needed);
+      return A.length > 0 ? A.sort((d, O) => O.space - d.space)[0].name : b.sort((d, O) => O.space - d.space)[0].name;
+    }, me = (e, a, l) => {
+      if (l === "top" || l === "bottom") {
+        const u = e.left + e.width / 2, b = a.left + a.width / 2;
+        return u - b;
+      } else {
+        const u = e.top + e.height / 2, b = a.top + a.height / 2;
+        return u - b;
+      }
+    }, be = $(() => {
+      if (!t.value) return {};
+      const e = P.value || r.value, a = j.value || z.value;
+      if (!e || !a) return {};
+      const l = a, u = t.value.direction, b = t.value.offsetX || 0, A = t.value.offsetY || 0, d = S.value.width > 0 ? S.value : { width: 320, height: 200 }, O = we(
+        l,
+        d,
+        u
+      );
+      ie.value = O;
+      let T = 0, L = 0;
+      const _ = 12;
+      switch (O) {
         case "top":
-          A = s.top - 12 + B, H = (e.value.tooltipTarget ? s.left : s.left + s.width / 2) + $;
+          T = l.top - d.height - _ + A, L = l.left + l.width / 2 - d.width / 2 + b;
           break;
         case "bottom":
-          A = s.bottom + 12 + B, H = (e.value.tooltipTarget ? s.left : s.left + s.width / 2) + $;
+          T = l.bottom + _ + A, L = l.left + l.width / 2 - d.width / 2 + b;
           break;
         case "left":
-          A = s.top + s.height / 2 + B, H = s.left - 12 + $;
+          T = l.top + l.height / 2 - d.height / 2 + A, L = l.left - d.width - _ + b;
           break;
         case "right":
-          A = s.top + s.height / 2 + B, H = s.right + 12 + $;
+          T = l.top + l.height / 2 - d.height / 2 + A, L = l.right + _ + b;
           break;
       }
-      return {
-        top: `${A}px`,
-        left: `${H}px`,
-        // Apply centering transform based on direction and whether we have a tooltip target
-        transform: p === "left" || p === "right" ? "translateY(-50%)" : e.value.tooltipTarget ? "none" : "translateX(-50%)"
-        // Center horizontally for top/bottom when no tooltip target
+      const ee = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }, E = v.viewportMargin;
+      L < E ? L = E : L + d.width > ee.width - E && (L = ee.width - d.width - E), T < E ? T = E : T + d.height > ee.height - E && (T = ee.height - d.height - E);
+      const ke = {
+        left: L,
+        top: T,
+        width: d.width,
+        height: d.height
       };
-    }), d = () => {
-      if (o.value) {
-        const a = o.value.getBoundingClientRect(), r = k.value;
-        (!r || r.top !== a.top || r.left !== a.left || r.width !== a.width || r.height !== a.height) && (k.value = a);
-      }
-      if (b.value) {
-        const a = b.value.getBoundingClientRect(), r = t.value;
-        (!r || r.top !== a.top || r.left !== a.left || r.width !== a.width || r.height !== a.height) && (t.value = a);
-      }
-    }, te = () => {
-      const a = () => {
-        n.value && o.value && (d(), h.value = requestAnimationFrame(a));
+      return oe.value = me(
+        l,
+        ke,
+        O
+      ), process.env.NODE_ENV === "development" && console.log("Tooltip positioning:", {
+        stepId: t.value.id,
+        preferredDirection: u,
+        finalDirection: O,
+        targetRect: {
+          top: l.top,
+          left: l.left,
+          width: l.width,
+          height: l.height
+        },
+        tooltipSize: d,
+        finalPosition: { top: T, left: L },
+        arrowOffset: oe.value
+      }), {
+        top: `${T}px`,
+        left: `${L}px`,
+        transform: "none"
+        // We handle positioning directly now
       };
-      h.value = requestAnimationFrame(a);
-    }, oe = () => {
-      h.value && (cancelAnimationFrame(h.value), h.value = null);
-    }, X = (a) => {
-      const r = [];
-      let s = a.parentElement;
-      for (; s && s !== document.body; ) {
-        const p = window.getComputedStyle(s);
-        (p.overflow === "auto" || p.overflow === "scroll" || p.overflowY === "auto" || p.overflowY === "scroll" || p.overflowX === "auto" || p.overflowX === "scroll") && r.push(s), s = s.parentElement;
+    }), h = () => {
+      if (r.value) {
+        const e = r.value.getBoundingClientRect(), a = z.value;
+        (!a || a.top !== e.top || a.left !== e.left || a.width !== e.width || a.height !== e.height) && (z.value = e);
       }
-      return r;
-    }, Y = () => {
-      if (!o.value) return;
-      window.addEventListener("scroll", d, { passive: !0 }), document.addEventListener("scroll", d, { passive: !0 }), window.addEventListener("resize", d, { passive: !0 }), X(o.value).forEach((r) => {
-        r.addEventListener("scroll", d, { passive: !0 });
-      }), te(), w.value = new MutationObserver(() => {
-        d();
-      }), w.value.observe(document.body, {
+      if (P.value) {
+        const e = P.value.getBoundingClientRect(), a = j.value;
+        (!a || a.top !== e.top || a.left !== e.left || a.width !== e.width || a.height !== e.height) && (j.value = e);
+      }
+      if (m.value) {
+        const e = {
+          width: m.value.offsetWidth,
+          height: m.value.offsetHeight
+        };
+        (S.value.width !== e.width || S.value.height !== e.height) && (S.value = e);
+      }
+    }, ye = () => {
+      const e = () => {
+        n.value && r.value && (h(), J.value = requestAnimationFrame(e));
+      };
+      J.value = requestAnimationFrame(e);
+    }, Se = () => {
+      J.value && (cancelAnimationFrame(J.value), J.value = null);
+    }, ne = (e) => {
+      const a = [];
+      let l = e.parentElement;
+      for (; l && l !== document.body; ) {
+        const u = window.getComputedStyle(l);
+        (u.overflow === "auto" || u.overflow === "scroll" || u.overflowY === "auto" || u.overflowY === "scroll" || u.overflowX === "auto" || u.overflowX === "scroll") && a.push(l), l = l.parentElement;
+      }
+      return a;
+    }, ue = () => {
+      if (!r.value) return;
+      window.addEventListener("scroll", h, { passive: !0 }), document.addEventListener("scroll", h, { passive: !0 }), window.addEventListener("resize", h, { passive: !0 }), ne(r.value).forEach((a) => {
+        a.addEventListener("scroll", h, { passive: !0 });
+      }), ye(), U.value = new MutationObserver(() => {
+        h();
+      }), U.value.observe(document.body, {
         childList: !0,
         // Child element additions/removals
         subtree: !0,
@@ -321,180 +458,253 @@ const fe = {
         // Attribute changes
         attributeFilter: ["style", "class"]
         // Focus on styling changes
-      });
-    }, N = () => {
-      window.removeEventListener("scroll", d), document.removeEventListener("scroll", d), window.removeEventListener("resize", d), o.value && X(o.value).forEach((r) => {
-        r.removeEventListener("scroll", d);
-      }), oe(), w.value && (w.value.disconnect(), w.value = null);
-    }, M = (a) => {
-      let r = document.querySelector(a);
-      return r || (r = document.querySelector(
-        `[data-tour-guide="${a}"]`
-      )), r;
-    }, I = async () => {
-      if (e.value) {
-        if (o.value && (o.value.style.removeProperty("z-index"), o.value.style.removeProperty("position"), o.value.style.removeProperty("border-radius"), o.value.style.removeProperty("pointer-events"), o.value.style.removeProperty("isolation"), o.value.removeAttribute("data-tour-guide-interactive")), o.value = M(e.value.target), !o.value) {
+      }), typeof ResizeObserver < "u" && (G.value = new ResizeObserver(() => {
+        h();
+      }), G.value.observe(r.value), m.value && G.value.observe(m.value));
+    }, Q = () => {
+      window.removeEventListener("scroll", h), document.removeEventListener("scroll", h), window.removeEventListener("resize", h), r.value && ne(r.value).forEach((a) => {
+        a.removeEventListener("scroll", h);
+      }), Se(), U.value && (U.value.disconnect(), U.value = null), G.value && (G.value.disconnect(), G.value = null);
+    }, de = (e) => {
+      let a = document.querySelector(e);
+      return a || (a = document.querySelector(
+        `[data-tour-guide="${e}"]`
+      )), a;
+    }, K = async () => {
+      if (t.value) {
+        if (r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), r.value = de(t.value.target), !r.value) {
           console.warn(
-            `Tour Guide: Target element "${e.value.target}" not found`
+            `Tour Guide: Target element "${t.value.target}" not found`
           );
           return;
         }
-        e.value.tooltipTarget ? (b.value = M(
-          e.value.tooltipTarget
-        ), b.value || (console.warn(
-          `Tour Guide: Tooltip target element "${e.value.tooltipTarget}" not found, falling back to main target`
-        ), b.value = null)) : b.value = null, e.value.scrollToView && (o.value.scrollIntoView({
+        t.value.tooltipTarget ? (P.value = de(
+          t.value.tooltipTarget
+        ), P.value || (console.warn(
+          `Tour Guide: Tooltip target element "${t.value.tooltipTarget}" not found, falling back to main target`
+        ), P.value = null)) : P.value = null, v.scrollToView && (r.value.scrollIntoView({
           behavior: "smooth",
           // Smooth animation
           block: "center",
           // Center vertically in viewport
           inline: "nearest"
           // Minimal horizontal scrolling
-        }), await new Promise((a) => setTimeout(a, 500))), o.value.style.position = "relative", o.value.style.zIndex = "60", o.value.style.borderRadius = "8px", o.value.style.isolation = "isolate", o.value.setAttribute("data-tour-guide-interactive", "true"), d();
+        }), await new Promise((e) => setTimeout(e, 500))), r.value.style.position = "relative", r.value.style.zIndex = "60", r.value.style.borderRadius = "8px", r.value.style.isolation = "isolate", r.value.setAttribute("data-tour-guide-interactive", "true"), h(), await q(), m.value ? S.value = {
+          width: m.value.offsetWidth || 320,
+          // fallback width
+          height: m.value.offsetHeight || 200
+          // fallback height
+        } : S.value = { width: 320, height: 200 }, h();
       }
-    }, q = async () => {
-      u.steps.length !== 0 && (n.value = !0, i.value = 0, u.allowInteractions || document.body.classList.add("tour-guide-active"), await W(), await I(), Y(), e.value?.beforeShow && await e.value.beforeShow(), m("start"), m("step-change", e.value, i.value), e.value?.afterShow && e.value.afterShow());
-    }, j = async () => {
-      e.value?.beforeHide && await e.value.beforeHide(), i.value < u.steps.length - 1 ? (i.value++, await W(), await I(), e.value?.beforeShow && await e.value.beforeShow(), m("step-change", e.value, i.value), e.value?.afterShow && e.value.afterShow()) : U();
-    }, D = async () => {
-      i.value > 0 && (e.value?.beforeHide && await e.value.beforeHide(), i.value--, await W(), await I(), e.value?.beforeShow && await e.value.beforeShow(), m("step-change", e.value, i.value), e.value?.afterShow && e.value.afterShow());
-    }, J = () => {
-      o.value && (o.value.style.removeProperty("z-index"), o.value.style.removeProperty("position"), o.value.style.removeProperty("border-radius"), o.value.style.removeProperty("pointer-events"), o.value.style.removeProperty("isolation"), o.value.removeAttribute("data-tour-guide-interactive")), N(), u.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, o.value = null, b.value = null, k.value = null, t.value = null, m("skip");
-    }, U = () => {
-      o.value && (o.value.style.removeProperty("z-index"), o.value.style.removeProperty("position"), o.value.style.removeProperty("border-radius"), o.value.style.removeProperty("pointer-events"), o.value.style.removeProperty("isolation"), o.value.removeAttribute("data-tour-guide-interactive")), N(), u.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, o.value = null, b.value = null, k.value = null, t.value = null, m("complete");
-    }, le = async (a) => {
-      a >= 0 && a < u.steps.length && (i.value = a, await W(), await I(), e.value?.beforeShow && await e.value.beforeShow(), m("step-change", e.value, i.value), e.value?.afterShow && e.value.afterShow());
+    }, ve = async () => {
+      v.steps.length !== 0 && (n.value = !0, i.value = 0, o(), v.allowInteractions || document.body.classList.add("tour-guide-active"), await q(), await K(), S.value = { width: 320, height: 200 }, ue(), await new Promise((e) => setTimeout(e, 100)), m.value && (S.value = {
+        width: m.value.offsetWidth || 320,
+        height: m.value.offsetHeight || 200
+      }), t.value?.beforeShow && await t.value.beforeShow(), k("start"), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow());
+    }, le = async () => {
+      t.value && I(t.value.id), t.value?.beforeHide && await t.value.beforeHide(), i.value < v.steps.length - 1 ? (i.value++, p(i.value), await q(), await K(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow()) : pe();
+    }, ae = async () => {
+      i.value > 0 && (t.value?.beforeHide && await t.value.beforeHide(), i.value--, p(i.value), await q(), await K(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow());
+    }, Z = () => {
+      r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, r.value = null, P.value = null, z.value = null, j.value = null, S.value = { width: 0, height: 0 }, f(), k("skip");
+    }, pe = () => {
+      t.value && I(t.value.id), r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, r.value = null, P.value = null, z.value = null, j.value = null, S.value = { width: 0, height: 0 }, f(), k("complete");
+    }, Ce = async (e) => {
+      if (e >= 0 && e < v.steps.length) {
+        for (let a = 0; a <= e; a++) {
+          const l = v.steps[a];
+          l && I(l.id);
+        }
+        i.value = e, p(i.value), await q(), await K(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow();
+      }
     };
-    return Z(() => {
-      u.autoStart && q();
-    }), ne(() => {
-      n.value && (N(), u.allowInteractions || document.body.classList.remove("tour-guide-active"));
-    }), O(
+    return fe(() => {
+      v.autoStart && ve();
+    }), xe(() => {
+      n.value && (Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"));
+    }), te(
       () => i.value,
       async () => {
-        n.value && await I();
+        n.value && await K();
       }
-    ), O(o, (a, r) => {
-      r && N(), a && n.value && (d(), Y());
-    }), O(b, () => {
-      n.value && d();
-    }), l({
-      startTourGuide: q,
-      skipTourGuide: J,
-      completeTourGuide: U,
-      nextStep: j,
-      previousStep: D,
-      goToStep: le,
-      isActive: V(n),
-      currentStepIndex: V(i)
-    }), (a, r) => (f(), g("div", null, [
-      n.value && o.value ? (f(), g("div", {
+    ), te(r, (e, a) => {
+      a && Q(), e && n.value && (h(), ue());
+    }), te(P, () => {
+      n.value && h();
+    }), te(
+      m,
+      (e) => {
+        e && n.value && q(() => {
+          S.value = {
+            width: e.offsetWidth || 320,
+            height: e.offsetHeight || 200
+          }, G.value && G.value.observe(e);
+        });
+      },
+      { immediate: !0 }
+    ), s({
+      startTourGuide: ve,
+      skipTourGuide: Z,
+      completeTourGuide: pe,
+      nextStep: le,
+      previousStep: ae,
+      goToStep: Ce,
+      isActive: re(n),
+      currentStepIndex: re(i)
+    }), (e, a) => (g(), w("div", null, [
+      n.value && r.value ? (g(), w("div", {
         key: 0,
-        style: x(_.value),
+        style: W(he.value),
         class: "fixed z-[35] pointer-events-none"
-      }, null, 4)) : L("", !0),
-      (f(), ie(ue, { to: "body" }, [
-        n.value && o.value ? (f(), g("div", {
+      }, null, 4)) : M("", !0),
+      (g(), Be(Ae, { to: "body" }, [
+        n.value && r.value ? (g(), w("div", {
           key: 0,
           ref_key: "tooltipRef",
-          ref: F,
-          style: x(ee.value),
+          ref: m,
+          style: W(be.value),
           class: "fixed z-[70]",
           "data-tour-guide-interactive": "true"
         }, [
-          ve(ye, {
+          He(Ne, {
             visible: n.value,
-            title: e.value?.title,
-            content: e.value?.content,
-            direction: e.value?.direction || "bottom",
+            title: t.value?.title,
+            content: t.value?.content,
+            direction: ie.value,
             "current-step": i.value + 1,
-            "total-steps": a.steps.length,
+            "total-steps": e.steps.length,
             "show-previous": i.value > 0,
-            "show-close": a.allowSkip,
-            "show-actions": e.value?.showAction,
-            onNext: j,
-            onPrevious: D,
-            onClose: J,
-            skipLabel: e.value?.skipLabel || C.value.skip,
-            nextLabel: e.value?.nextLabel || C.value.next,
-            prevLabel: e.value?.prevLabel || C.value.previous,
-            finishLabel: e.value?.finishLabel || C.value.finish,
-            backgroundColor: e.value?.backgroundColor,
-            textColor: e.value?.textColor,
-            borderRadius: e.value?.borderRadius,
-            padding: e.value?.padding,
-            maxWidth: e.value?.maxWidth,
-            boxShadow: e.value?.boxShadow,
-            buttonBackgroundColor: e.value?.buttonBackgroundColor,
-            buttonTextColor: e.value?.buttonTextColor,
-            buttonHoverColor: e.value?.buttonHoverColor,
-            skipButtonColor: e.value?.skipButtonColor,
-            skipButtonHoverColor: e.value?.skipButtonHoverColor,
-            progressActiveColor: e.value?.progressActiveColor,
-            progressInactiveColor: e.value?.progressInactiveColor,
-            tooltipClass: e.value?.tooltipClass,
-            headerClass: e.value?.headerClass,
-            contentClass: e.value?.contentClass,
-            actionsClass: e.value?.actionsClass
-          }, ce({ _: 2 }, [
-            a.$slots["step-content"] ? {
+            "show-close": e.allowSkip,
+            "show-actions": t.value?.showAction,
+            "arrow-offset": oe.value,
+            onNext: le,
+            onPrevious: ae,
+            onClose: Z,
+            skipLabel: t.value?.skipLabel || H.value.skip,
+            nextLabel: t.value?.nextLabel || H.value.next,
+            prevLabel: t.value?.prevLabel || H.value.previous,
+            finishLabel: t.value?.finishLabel || H.value.finish,
+            backgroundColor: t.value?.tooltip?.backgroundColor,
+            textColor: t.value?.tooltip?.textColor,
+            borderRadius: t.value?.tooltip?.borderRadius,
+            padding: t.value?.tooltip?.padding,
+            maxWidth: t.value?.tooltip?.maxWidth,
+            boxShadow: t.value?.tooltip?.boxShadow,
+            buttonBackgroundColor: t.value?.tooltip?.buttonBackgroundColor,
+            buttonTextColor: t.value?.tooltip?.buttonTextColor,
+            buttonHoverColor: t.value?.tooltip?.buttonHoverColor,
+            skipButtonColor: t.value?.tooltip?.skipButtonColor,
+            skipButtonHoverColor: t.value?.tooltip?.skipButtonHoverColor,
+            progressActiveColor: t.value?.tooltip?.progressActiveColor,
+            progressInactiveColor: t.value?.tooltip?.progressInactiveColor,
+            tooltipClass: t.value?.tooltip?.tooltipClass,
+            headerClass: t.value?.tooltip?.headerClass,
+            contentClass: t.value?.tooltip?.contentClass,
+            actionsClass: t.value?.tooltip?.actionsClass
+          }, Ie({ _: 2 }, [
+            e.$slots.default ? {
               name: "default",
-              fn: de(() => [
-                R(a.$slots, "step-content", {
-                  step: e.value,
-                  index: i.value
-                })
+              fn: N((l) => [
+                C(e.$slots, "default", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length
+                })))
               ]),
               key: "0"
+            } : void 0,
+            e.$slots.header ? {
+              name: "header",
+              fn: N((l) => [
+                C(e.$slots, "header", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length
+                })))
+              ]),
+              key: "1"
+            } : void 0,
+            e.$slots.content ? {
+              name: "content",
+              fn: N((l) => [
+                C(e.$slots, "content", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length
+                })))
+              ]),
+              key: "2"
+            } : void 0,
+            e.$slots["skip-button"] ? {
+              name: "skip-button",
+              fn: N((l) => [
+                C(e.$slots, "skip-button", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length,
+                  onSkip: Z
+                })))
+              ]),
+              key: "3"
+            } : void 0,
+            e.$slots.progress ? {
+              name: "progress",
+              fn: N((l) => [
+                C(e.$slots, "progress", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length
+                })))
+              ]),
+              key: "4"
+            } : void 0,
+            e.$slots.actions ? {
+              name: "actions",
+              fn: N((l) => [
+                C(e.$slots, "actions", V(F({
+                  ...l,
+                  step: t.value,
+                  stepIndex: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length,
+                  onNext: le,
+                  onPrevious: ae,
+                  onSkip: Z
+                })))
+              ]),
+              key: "5"
+            } : void 0,
+            e.$slots["step-content"] ? {
+              name: "step-content",
+              fn: N((l) => [
+                C(e.$slots, "step-content", V(F({
+                  ...l,
+                  step: t.value,
+                  index: i.value,
+                  currentStep: i.value + 1,
+                  totalSteps: e.steps.length
+                })))
+              ]),
+              key: "6"
             } : void 0
-          ]), 1032, ["visible", "title", "content", "direction", "current-step", "total-steps", "show-previous", "show-close", "show-actions", "skipLabel", "nextLabel", "prevLabel", "finishLabel", "backgroundColor", "textColor", "borderRadius", "padding", "maxWidth", "boxShadow", "buttonBackgroundColor", "buttonTextColor", "buttonHoverColor", "skipButtonColor", "skipButtonHoverColor", "progressActiveColor", "progressInactiveColor", "tooltipClass", "headerClass", "contentClass", "actionsClass"])
-        ], 4)) : L("", !0)
+          ]), 1032, ["visible", "title", "content", "direction", "current-step", "total-steps", "show-previous", "show-close", "show-actions", "arrow-offset", "skipLabel", "nextLabel", "prevLabel", "finishLabel", "backgroundColor", "textColor", "borderRadius", "padding", "maxWidth", "boxShadow", "buttonBackgroundColor", "buttonTextColor", "buttonHoverColor", "skipButtonColor", "skipButtonHoverColor", "progressActiveColor", "progressInactiveColor", "tooltipClass", "headerClass", "contentClass", "actionsClass"])
+        ], 4)) : M("", !0)
       ]))
     ]));
   }
-}), c = pe({
-  isActive: !1,
-  currentStep: 0,
-  completedSteps: [],
-  hasSeenTourGuide: !1
-}), ke = () => {
-  const y = () => {
-    if (typeof window < "u") {
-      const n = localStorage.getItem("tour-guide-state");
-      if (n) {
-        const i = JSON.parse(n);
-        Object.assign(c, i);
-      }
-    }
-  }, l = () => {
-    typeof window < "u" && localStorage.setItem("tour-guide-state", JSON.stringify(c));
-  }, S = (n) => {
-    c.isActive = !0, c.currentStep = 0, l();
-  }, u = (n) => {
-    c.completedSteps.includes(n) || (c.completedSteps.push(n), l());
-  }, P = () => {
-    c.isActive = !1, c.hasSeenTourGuide = !0, l();
-  }, C = () => {
-    c.isActive = !1, c.currentStep = 0, c.completedSteps = [], c.hasSeenTourGuide = !1, l();
-  }, m = (n) => c.completedSteps.includes(n);
-  return Z(() => {
-    y();
-  }), {
-    // State
-    tourGuideState: V(c),
-    // Actions
-    startTourGuide: S,
-    completeStep: u,
-    finishTourGuide: P,
-    resetTourGuide: C,
-    isStepCompleted: m,
-    // Helpers
-    loadTourGuideState: y,
-    saveTourGuideState: l
-  };
-};
+});
 export {
-  Ce as TourGuideManager,
-  ye as TourGuideTooltip,
-  ke as useTourGuide
+  De as TourGuideManager,
+  Ne as TourGuideTooltip,
+  Ve as useTourGuide
 };

@@ -19,14 +19,59 @@ interface Props {
     labels?: TourGuideLabels;
     /** Whether to allow interactions with other elements during tour (default: false) */
     allowInteractions?: boolean;
+    /** Minimum distance from viewport edges for tooltip positioning */
+    viewportMargin?: number;
+    /** Auto-scroll target into view before highlighting (default: false) */
+    scrollToView?: boolean;
 }
 declare function __VLS_template(): {
     attrs: Partial<{}>;
     slots: {
-        'step-content'?(_: {
+        default?(_: {
             step: TourGuideStep;
-            index: number;
+            stepIndex: number;
+            currentStep: number;
+            totalSteps: number;
+            content: string | undefined;
         }): any;
+        header?(_: {
+            step: TourGuideStep;
+            stepIndex: number;
+            currentStep: number;
+            totalSteps: number;
+            title: string | undefined;
+        }): any;
+        content?(_: any): any;
+        'skip-button'?(_: {
+            step: TourGuideStep;
+            stepIndex: number;
+            currentStep: number;
+            totalSteps: number;
+            onSkip: () => void;
+            skipLabel: string;
+            onClose: () => void;
+        }): any;
+        progress?(_: {
+            step: TourGuideStep;
+            stepIndex: number;
+            currentStep: number;
+            totalSteps: number;
+        }): any;
+        actions?(_: {
+            step: TourGuideStep;
+            stepIndex: number;
+            currentStep: number;
+            totalSteps: number;
+            onNext: () => Promise<void>;
+            onPrevious: () => Promise<void>;
+            onSkip: () => void;
+            showPrevious: boolean;
+            isLastStep: boolean;
+            prevLabel: string;
+            nextLabel: string;
+            finishLabel: string;
+        }): any;
+        'step-content'?(_: any): any;
     };
     refs: {
         tooltipRef: HTMLDivElement;
@@ -59,6 +104,8 @@ declare const __VLS_component: import('vue').DefineComponent<Props, {
     allowSkip: boolean;
     highlightPadding: number;
     allowInteractions: boolean;
+    viewportMargin: number;
+    scrollToView: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {
     tooltipRef: HTMLDivElement;
 }, HTMLDivElement>;

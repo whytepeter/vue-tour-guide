@@ -168,7 +168,7 @@ interface TourGuideStep {
   id: string                              // Unique step identifier
   title: string                           // Tooltip title
   content?: string                        // Tooltip content
-  target: string                          // CSS selector or data-tour-guide value
+  target: string                          // CSS selector, class, id, or data attribute
   tooltipTarget?: string                  // Separate element for tooltip positioning
   direction?: 'top' | 'bottom' | 'left' | 'right' // Tooltip direction
   offsetX?: number                        // Horizontal offset (px)
@@ -180,6 +180,25 @@ interface TourGuideStep {
   nextLabel?: string                      // Custom next button label  
   prevLabel?: string                      // Custom previous button label
   finishLabel?: string                    // Custom finish button label
+  tooltip?: {                             // Tooltip customization options
+    backgroundColor?: string
+    textColor?: string
+    borderRadius?: string
+    padding?: string
+    maxWidth?: string
+    boxShadow?: string
+    buttonBackgroundColor?: string
+    buttonTextColor?: string
+    buttonHoverColor?: string
+    skipButtonColor?: string
+    skipButtonHoverColor?: string
+    progressActiveColor?: string
+    progressInactiveColor?: string
+    tooltipClass?: string
+    headerClass?: string
+    contentClass?: string
+    actionsClass?: string
+  }
   beforeShow?: () => void | Promise<void> // Pre-show hook
   afterShow?: () => void                  // Post-show hook
   beforeHide?: () => void | Promise<void> // Pre-hide hook
@@ -212,6 +231,8 @@ const {
 
 ## Element Targeting
 
+The `target` property accepts various CSS selectors and data attributes:
+
 ### Data Attributes (Recommended)
 
 ```html
@@ -232,8 +253,65 @@ const {
 
 ```javascript
 {
-  target: '#welcome' // Direct CSS selector
+  target: '#welcome'        // ID selector
+  target: '.hero-section'   // Class selector
+  target: 'div'             // Element selector
+  target: '[data-tour-guide="integrations"]' // Data attribute selector
 }
+```
+
+### Examples
+
+```html
+<!-- Using class -->
+<div class="tooltip-anchor">Content</div>
+
+<!-- Using ID -->
+<div id="tooltip-anchor">Content</div>
+
+<!-- Using data attribute -->
+<div data-tour-guide="integrations">Content</div>
+```
+
+```javascript
+{
+  target: 'tooltip-anchor'                    // Class selector
+  target: '#tooltip-anchor'                   // ID selector  
+  target: '[data-tour-guide="integrations"]'  // Data attribute selector
+  target: 'button[type="submit"]'             // Complex CSS selector
+  target: '.nav-item.active'                  // Compound class selector
+}
+```
+
+### Complete Example
+
+```javascript
+const tourSteps = [
+  {
+    id: 'welcome',
+    title: 'Welcome!',
+    target: 'welcome-card',                    // data-tour-guide="welcome-card"
+    content: 'This is the welcome section'
+  },
+  {
+    id: 'features', 
+    title: 'Features',
+    target: '.feature-list',                   // class="feature-list"
+    content: 'Check out our amazing features'
+  },
+  {
+    id: 'submit',
+    title: 'Submit',
+    target: '#submit-button',                  // id="submit-button"
+    content: 'Click here to submit'
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    target: '[data-tour-guide="settings"]',   // data-tour-guide="settings"
+    content: 'Configure your settings here'
+  }
+];
 ```
 
 ### Custom Button Labels
@@ -279,6 +357,8 @@ The tour guide tooltips are fully customizable with colors, styling, and content
 
 #### Custom Colors & Styling
 
+The `backgroundColor` property supports both solid colors and CSS gradients:
+
 ```javascript
 {
   id: 'custom-step',
@@ -287,32 +367,35 @@ The tour guide tooltips are fully customizable with colors, styling, and content
   target: 'my-element',
   showAction: true,
   
-  // Custom colors
-  backgroundColor: '#1f2937',
-  textColor: '#ffffff',
-  borderRadius: '1rem',
-  padding: '1.5rem',
-  maxWidth: '24rem',
-  boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-  
-  // Button styling
-  buttonBackgroundColor: '#3b82f6',
-  buttonTextColor: '#ffffff',
-  buttonHoverColor: '#2563eb',
-  
-  // Skip button styling
-  skipButtonColor: '#9ca3af',
-  skipButtonHoverColor: '#ffffff',
-  
-  // Progress indicators
-  progressActiveColor: '#10b981',
-  progressInactiveColor: 'rgba(255, 255, 255, 0.2)',
-  
-  // Custom CSS classes
-  tooltipClass: 'my-tooltip-class',
-  headerClass: 'my-header-class',
-  contentClass: 'my-content-class',
-  actionsClass: 'my-actions-class'
+  // Tooltip customization
+  tooltip: {
+    // Custom colors (supports gradients too!)
+    backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    textColor: '#ffffff',
+    borderRadius: '1rem',
+    padding: '1.5rem',
+    maxWidth: '24rem',
+    boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+    
+    // Button styling
+    buttonBackgroundColor: '#3b82f6',
+    buttonTextColor: '#ffffff',
+    buttonHoverColor: '#2563eb',
+    
+    // Skip button styling
+    skipButtonColor: '#9ca3af',
+    skipButtonHoverColor: '#ffffff',
+    
+    // Progress indicators
+    progressActiveColor: '#10b981',
+    progressInactiveColor: 'rgba(255, 255, 255, 0.2)',
+    
+    // Custom CSS classes
+    tooltipClass: 'my-tooltip-class',
+    headerClass: 'my-header-class',
+    contentClass: 'my-content-class',
+    actionsClass: 'my-actions-class'
+  }
 }
 ```
 

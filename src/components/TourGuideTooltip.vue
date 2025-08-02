@@ -49,7 +49,7 @@
 
       <!-- Body -->
       <div
-        v-if="content || $slots.default || $slots.content"
+        v-if="content || $slots.default"
         :class="[
           'opacity-90 font-thin leading-4 break-words mb-3',
           props.contentClass,
@@ -261,8 +261,17 @@ const tooltipStyle = computed(() => {
 
   const finalWidth = Math.min(estimatedWidth, 350); // max 350px
 
+  // Handle gradients vs solid colors
+  const style: Record<string, string> = {};
+
+  if (props.backgroundColor?.includes("gradient")) {
+    style.background = props.backgroundColor;
+  } else {
+    style.backgroundColor = props.backgroundColor;
+  }
+
   return {
-    backgroundColor: props.backgroundColor,
+    ...style,
     color: props.textColor,
     borderRadius: props.borderRadius,
     padding: props.padding,
@@ -296,19 +305,20 @@ const arrowDirectionClass = computed(() => {
 });
 
 const arrowStyle = computed(() => {
-  const style: Record<string, string> = {
-    backgroundColor: props.backgroundColor,
-  };
+  const style: Record<string, string> = {};
+
+  // Handle gradients vs solid colors for arrow
+  if (props.backgroundColor?.includes("gradient")) {
+    style.background = props.backgroundColor;
+  } else {
+    style.backgroundColor = props.backgroundColor;
+  }
 
   // Apply offset to center arrow on target
   if (props.direction === "top" || props.direction === "bottom") {
     // For top/bottom positioning, offset horizontally
     if (props.arrowOffset !== 0) {
       const offsetPx = Math.max(-50, Math.min(50, props.arrowOffset)); // Clamp offset
-      const baseTransform =
-        props.direction === "top"
-          ? "translateX(-50%) rotate(45deg)"
-          : "translateX(-50%) rotate(45deg)";
       style.transform = `translateX(calc(-50% + ${offsetPx}px)) rotate(45deg)`;
     }
   } else if (props.direction === "left" || props.direction === "right") {
