@@ -65,7 +65,6 @@
         </template>
         <template v-else>
           {{ content }}
-          {{ backgroundColor }}
         </template>
       </div>
 
