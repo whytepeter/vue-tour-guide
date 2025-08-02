@@ -43,7 +43,7 @@
     <div class="flex justify-center mb-12">
       <button
         @click="startTour"
-        class="floating-btn bg-[#4fc08d] text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center gap-3"
+        class="floating-btn bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center gap-3"
       >
         <i class="fa-regular fa-compass animate-pulse-slow"></i>
         Start Interactive Tour
