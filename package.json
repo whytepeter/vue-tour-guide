@@ -1,5 +1,5 @@
 {
-  "name": "vue-tour-guide",
+  "name": "@whytepeter/vue-tour-guide",
   "version": "1.0.0",
   "description": "A comprehensive Vue 3 tour guide library with TypeScript support for Vue and Nuxt applications",
   "main": "dist/index.js",
@@ -11,7 +11,8 @@
   "scripts": {
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "dev": "vite",
-    "demo": "vite --port 3000",
+    "demo": "vite --mode demo",
+    "build:demo": "vite build --mode demo",
     "build-watch": "vite build --watch",
     "type-check": "vue-tsc --noEmit",
     "prepublishOnly": "npm run build"
