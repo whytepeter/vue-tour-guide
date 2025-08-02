@@ -32,20 +32,7 @@ The demo showcases all the features of Vue Tour Guide including:
 - Accessibility features
 - Responsive design
 
-### Running the Demo Locally
-
-```bash
-# Install dependencies
-npm install
-
-# Start the demo
-npm run demo
-
-# Build the demo for production
-npm run build:demo
-```
-
-The demo will be available at `http://localhost:5173` (or the next available port).
+> **Note**: If the demo is not available, make sure GitHub Pages is enabled in your repository settings.
 
 ## Quick Start
 
