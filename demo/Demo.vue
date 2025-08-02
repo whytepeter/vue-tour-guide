@@ -1,27 +1,37 @@
 <template>
-  <div class="min-h-screen bg-gray-50 p-4 sm:p-8">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-8">
     <!-- Floating GitHub link -->
     <a
       href="https://github.com/whytepeter/vue-tour-guide"
       target="_blank"
-      class="fixed top-4 right-4 z-50 bg-white p-3 rounded-full shadow-lg text-gray-700 hover:text-blue-600 transition-colors"
+      class="size-12 flex items-center justify-center fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
     >
       <i class="fab fa-github text-xl"></i>
     </a>
 
+    <button
+      @click="toggleDarkMode"
+      class="size-12 flex items-center justify-center fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+    >
+      <i
+        :class="darkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
+        class="text-xl"
+      ></i>
+    </button>
+
     <!-- Header -->
     <header class="py-8 text-center">
       <div
-        class="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center"
+        class="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center"
       >
         <i class="fa-regular fa-compass text-4xl text-white"></i>
       </div>
       <h1
-        class="text-4xl font-bold mb-4 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"
+        class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
       >
         Vue Tour Guide
       </h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
         Create beautiful, interactive tour guides for your Vue applications
       </p>
     </header>
@@ -43,7 +53,7 @@
       <div class="space-y-6">
         <div
           data-tour-guide="welcome-card"
-          class="card-hover bg-white p-6 rounded-xl shadow-md border border-gray-100"
+          class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
         >
           <div
             class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4"
@@ -55,7 +65,7 @@
           <h2 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">
             Welcome Card
           </h2>
-          <p class="text-gray-600">
+          <p class="text-gray-600 dark:text-gray-400">
             This is the first element in our tour. Click "Start Tour" to begin
             your journey!
           </p>
@@ -75,7 +85,7 @@
 
         <div
           data-tour-guide="feature-list"
-          class="card-hover bg-white p-6 rounded-xl shadow-md border border-gray-100"
+          class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
         >
           <div
             class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4"
@@ -87,7 +97,7 @@
           <h2 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">
             Amazing Features
           </h2>
-          <ul class="space-y-3">
+          <ul class="space-y-3 text-gray-600 dark:text-gray-400">
             <li class="flex items-center">
               <i class="fa-solid fa-check text-green-500 mr-3"></i>
               <span>Vue 3 & Composition API</span>
@@ -116,7 +126,7 @@
       <div class="space-y-6">
         <div
           data-tour-guide="action-button"
-          class="card-hover bg-white p-6 rounded-xl shadow-md border border-gray-100"
+          class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
         >
           <div
             class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4"
@@ -147,14 +157,14 @@
             >
               🔄 Reset Tour
             </button>
-            <div class="pt-3 border-t border-gray-200">
+            <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
               <label class="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   v-model="allowInteractions"
                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                 />
-                <span class="text-sm text-gray-600"
+                <span class="text-sm text-gray-600 dark:text-gray-400"
                   >Allow interactions during tour</span
                 >
               </label>
@@ -164,7 +174,7 @@
 
         <div
           data-tour-guide="settings-panel"
-          class="card-hover bg-white p-6 rounded-xl shadow-md border border-gray-100"
+          class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
         >
           <div
             class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4"
@@ -176,7 +186,7 @@
           <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">
             ⚙️ Settings
           </h2>
-          <div class="space-y-4">
+          <div class="space-y-4 text-gray-600 dark:text-gray-400">
             <label class="flex items-center space-x-3">
               <input
                 type="checkbox"
@@ -193,8 +203,16 @@
               />
               <span>Auto-save progress</span>
             </label>
+            <label class="flex items-center space-x-3">
+              <input
+                type="checkbox"
+                class="w-4 h-4 rounded text-blue-600"
+                v-model="darkMode"
+              />
+              <span>Dark mode</span>
+            </label>
           </div>
-          <div class="mt-6 pt-4 border-t border-gray-200">
+          <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
             <button
               data-tour-guide="tooltip-anchor"
               class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors shadow-sm"
@@ -209,13 +227,13 @@
     <!-- Tour Status -->
     <div
       data-tour-guide="status-panel"
-      class="card-hover bg-white rounded-xl shadow-lg p-6 mt-12 max-w-4xl mx-auto border border-gray-100"
+      class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mt-12 max-w-4xl mx-auto border border-gray-100 dark:border-gray-700"
     >
       <div class="flex items-center justify-between mb-6">
         <h2
           class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2"
         >
-          <i class="fa-solid fa-chart-simple text-primary-500"></i>
+          <i class="fa-solid fa-chart-simple text-blue-500"></i>
           Tour Status
         </h2>
         <div class="flex items-center gap-2">
@@ -229,10 +247,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h3 class="font-semibold mb-3 text-gray-700">Current Status</h3>
-          <div class="bg-gray-50/50 rounded-xl p-4">
+          <h3 class="font-semibold mb-3 text-gray-700 dark:text-gray-300">
+            Current Status
+          </h3>
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-gray-600">Active:</span>
+              <span class="text-gray-600 dark:text-gray-400">Active:</span>
               <span
                 :class="
                   tourGuideState.isActive ? 'text-green-600' : 'text-red-600'
@@ -243,13 +263,17 @@
               </span>
             </div>
             <div class="flex items-center justify-between mb-3">
-              <span class="text-gray-600">Current Step:</span>
+              <span class="text-gray-600 dark:text-gray-400"
+                >Current Step:</span
+              >
               <span class="font-medium">{{
                 tourGuideState.currentStep + 1
               }}</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-gray-600">Has Seen Tour:</span>
+              <span class="text-gray-600 dark:text-gray-400"
+                >Has Seen Tour:</span
+              >
               <span class="font-medium">
                 {{ tourGuideState.hasSeenTourGuide ? "Yes" : "No" }}
               </span>
@@ -258,15 +282,19 @@
         </div>
 
         <div>
-          <h3 class="font-semibold mb-3 text-gray-700">Progress</h3>
-          <div class="bg-gray-50/50 rounded-xl p-4">
-            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+          <h3 class="font-semibold mb-3 text-gray-700 dark:text-gray-300">
+            Progress
+          </h3>
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+            <div
+              class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2.5 mb-4"
+            >
               <div
-                class="bg-gradient-to-r from-primary-500 to-secondary-500 h-2.5 rounded-full"
+                class="bg-gradient-to-r from-blue-500 to-purple-500 h-2.5 rounded-full"
                 :style="{ width: progressPercentage + '%' }"
               ></div>
             </div>
-            <div class="text-center text-sm text-gray-600">
+            <div class="text-center text-sm text-gray-600 dark:text-gray-400">
               {{ progressPercentage }}% completed ({{
                 tourGuideState.completedSteps.length
               }}/{{ tourSteps.length }} steps)
@@ -308,6 +336,8 @@ const { tourGuideState, resetTourGuide: resetTourState } = useTourGuide();
 const tourManager = ref<InstanceType<typeof TourGuideManager>>();
 
 // UI State
+
+const darkMode = ref(false);
 const allowInteractions = ref(false);
 
 // Custom Labels for Tour Guide
@@ -456,15 +486,40 @@ const resetTourGuide = () => {
   resetTourState();
   alert("🔄 Tour state has been reset!");
 };
+
+// Dark mode toggle
+const toggleDarkMode = () => {
+  darkMode.value = !darkMode.value;
+  if (darkMode.value) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+};
+
+// Watch dark mode for checkbox sync
+watch(darkMode, (newVal) => {
+  if (newVal) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+});
 </script>
 
 <style scoped>
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .floating-btn {
-  @apply shadow-lg;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   animation: pulse-slow 4s infinite;
 }
 
@@ -479,7 +534,8 @@ const resetTourGuide = () => {
 }
 
 .tour-highlight {
-  @apply ring-2 ring-blue-500 ring-opacity-50;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+  border-radius: 0.5rem;
 }
 
 /* Add dark mode transitions */
@@ -493,6 +549,6 @@ const resetTourGuide = () => {
 .text-gray-200,
 .border-gray-100,
 .border-gray-700 {
-  @apply transition-colors duration-300;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 </style>
