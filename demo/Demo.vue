@@ -9,16 +9,6 @@
       <i class="fab fa-github text-xl"></i>
     </a>
 
-    <button
-      @click="toggleDarkMode"
-      class="size-12 flex items-center justify-center fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-    >
-      <i
-        :class="darkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
-        class="text-xl"
-      ></i>
-    </button>
-
     <!-- Header -->
     <header class="py-8 text-center">
       <div
@@ -59,7 +49,7 @@
             class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4"
           >
             <i
-              class="fa-solid fa-hand-wave text-blue-500 dark:text-blue-400 text-xl"
+              class="fa-solid fa-hand text-blue-500 dark:text-blue-400 text-xl"
             ></i>
           </div>
           <h2 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">
@@ -203,14 +193,6 @@
               />
               <span>Auto-save progress</span>
             </label>
-            <label class="flex items-center space-x-3">
-              <input
-                type="checkbox"
-                class="w-4 h-4 rounded text-blue-600"
-                v-model="darkMode"
-              />
-              <span>Dark mode</span>
-            </label>
           </div>
           <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
             <button
@@ -250,7 +232,9 @@
           <h3 class="font-semibold mb-3 text-gray-700 dark:text-gray-300">
             Current Status
           </h3>
-          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+          <div
+            class="bg-gray-50 dark:bg-gray-700/50 text-gray-600 dark:text-gray-400 rounded-xl p-4"
+          >
             <div class="flex items-center justify-between mb-3">
               <span class="text-gray-600 dark:text-gray-400">Active:</span>
               <span
@@ -337,7 +321,6 @@ const tourManager = ref<InstanceType<typeof TourGuideManager>>();
 
 // UI State
 
-const darkMode = ref(false);
 const allowInteractions = ref(false);
 
 // Custom Labels for Tour Guide
@@ -486,25 +469,6 @@ const resetTourGuide = () => {
   resetTourState();
   alert("🔄 Tour state has been reset!");
 };
-
-// Dark mode toggle
-const toggleDarkMode = () => {
-  darkMode.value = !darkMode.value;
-  if (darkMode.value) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-};
-
-// Watch dark mode for checkbox sync
-watch(darkMode, (newVal) => {
-  if (newVal) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-});
 </script>
 
 <style scoped>
