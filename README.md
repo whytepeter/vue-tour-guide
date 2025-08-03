@@ -25,15 +25,6 @@ npm install v-tour-guide
 
 🎮 **Try it out**: [Live Demo](https://whytepeter.github.io/v-tour-guide/)
 
-The demo showcases all the features of Vue Tour Guide including:
-- Interactive tour steps
-- Custom styling with gradients
-- Advanced tooltip positioning
-- Accessibility features
-- Responsive design
-
-> **Note**: If the demo is not available, make sure GitHub Pages is enabled in your repository settings.
-
 ## Quick Start
 
 ### Vue 3 Application
@@ -116,14 +107,7 @@ const steps: TourGuideStep[] = [
 </script>
 ```
 
-## CSS Setup
 
-The package includes Tailwind CSS via CDN by default. If you're using your own Tailwind setup, you can import just the core styles:
-
-```typescript
-// Import without Tailwind CDN
-import 'v-tour-guide/dist/style.css'
-```
 
 ## API Reference
 
@@ -244,133 +228,45 @@ const {
 
 ## Element Targeting
 
-The `target` property accepts various CSS selectors and data attributes:
-
-### Data Attributes (Recommended)
+The `target` property accepts CSS selectors and data attributes:
 
 ```html
-<div data-tour-guide="my-element">Content</div>
+<!-- Using data attributes (recommended) -->
+<div data-tour-guide="welcome">Welcome!</div>
+
+<!-- Using CSS selectors -->
+<div id="submit-button">Submit</div>
+<div class="feature-list">Features</div>
 ```
-
-```javascript
-{
-  target: 'my-element' // Targets [data-tour-guide="my-element"]
-}
-```
-
-### CSS Selectors
-
-```html
-<div id="welcome" class="hero-section">Content</div>
-```
-
-```javascript
-{
-  target: '#welcome'        // ID selector
-  target: '.hero-section'   // Class selector
-  target: 'div'             // Element selector
-  target: '[data-tour-guide="integrations"]' // Data attribute selector
-}
-```
-
-### Examples
-
-```html
-<!-- Using class -->
-<div class="tooltip-anchor">Content</div>
-
-<!-- Using ID -->
-<div id="tooltip-anchor">Content</div>
-
-<!-- Using data attribute -->
-<div data-tour-guide="integrations">Content</div>
-```
-
-```javascript
-{
-  target: 'tooltip-anchor'                    // Class selector
-  target: '#tooltip-anchor'                   // ID selector  
-  target: '[data-tour-guide="integrations"]'  // Data attribute selector
-  target: 'button[type="submit"]'             // Complex CSS selector
-  target: '.nav-item.active'                  // Compound class selector
-}
-```
-
-### Complete Example
 
 ```javascript
 const tourSteps = [
   {
     id: 'welcome',
     title: 'Welcome!',
-    target: 'welcome-card',                    // data-tour-guide="welcome-card"
-    content: 'This is the welcome section'
-  },
-  {
-    id: 'features', 
-    title: 'Features',
-    target: '.feature-list',                   // class="feature-list"
-    content: 'Check out our amazing features'
+    target: 'welcome',           // data-tour-guide="welcome"
+    content: 'Welcome to our app'
   },
   {
     id: 'submit',
     title: 'Submit',
-    target: '#submit-button',                  // id="submit-button"
-    content: 'Click here to submit'
+    target: '#submit-button',    // ID selector
+    content: 'Click to submit'
   },
   {
-    id: 'settings',
-    title: 'Settings',
-    target: '[data-tour-guide="settings"]',   // data-tour-guide="settings"
-    content: 'Configure your settings here'
+    id: 'features',
+    title: 'Features',
+    target: '.feature-list',     // Class selector
+    content: 'Check out our features'
   }
 ];
 ```
 
-### Custom Button Labels
 
-You can customize button labels either globally or per step:
-
-#### Global Labels
-
-```vue
-<template>
-  <TourGuideManager 
-    :steps="steps" 
-    :labels="{ 
-      skip: 'Skip Tour',
-      next: 'Continue', 
-      previous: 'Go Back',
-      finish: 'Complete'
-    }"
-  />
-</template>
-```
-
-#### Per-Step Labels
-
-```javascript
-{
-  id: 'final-step',
-  title: 'Almost Done!',
-  target: 'submit-button',
-  skipLabel: 'Exit Now',
-  nextLabel: 'Continue',
-  prevLabel: 'Go Back',  
-  finishLabel: 'All Done!',
-  showAction: true
-}
-```
-
-**Note:** Step-level labels override global labels for that specific step.
 
 ### Tooltip Customization
 
-The tour guide tooltips are fully customizable with colors, styling, and content slots.
-
-#### Custom Colors & Styling
-
-The `backgroundColor` property supports both solid colors and CSS gradients:
+You can customize tooltip appearance and behavior:
 
 ```javascript
 {
@@ -380,174 +276,39 @@ The `backgroundColor` property supports both solid colors and CSS gradients:
   target: 'my-element',
   showAction: true,
   
-  // Tooltip customization
   tooltip: {
-    // Custom colors (supports gradients too!)
     backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     textColor: '#ffffff',
     borderRadius: '1rem',
     padding: '1.5rem',
     maxWidth: '24rem',
     boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-    
-    // Button styling
     buttonBackgroundColor: '#3b82f6',
     buttonTextColor: '#ffffff',
-    buttonHoverColor: '#2563eb',
-    
-    // Skip button styling
-    skipButtonColor: '#9ca3af',
-    skipButtonHoverColor: '#ffffff',
-    
-    // Progress indicators
-    progressActiveColor: '#10b981',
-    progressInactiveColor: 'rgba(255, 255, 255, 0.2)',
-    
-    // Custom CSS classes
-    tooltipClass: 'my-tooltip-class',
-    headerClass: 'my-header-class',
-    contentClass: 'my-content-class',
-    actionsClass: 'my-actions-class'
+    buttonHoverColor: '#2563eb'
   }
 }
 ```
 
-#### Content Slots
 
-For maximum flexibility, you can customize any part of the tooltip using Vue slots:
-
-```vue
-<template>
-  <TourGuideManager :steps="steps">
-    <!-- Custom header -->
-    <template #header="{ title, currentStep, totalSteps }">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-          <span class="text-white font-bold">{{ currentStep }}</span>
-        </div>
-        <h3 class="text-lg font-bold">{{ title }}</h3>
-      </div>
-    </template>
-
-    <!-- Custom content -->
-    <template #content="{ content, currentStep, totalSteps }">
-      <div class="space-y-2">
-        <p>{{ content }}</p>
-        <div class="text-xs opacity-75">
-          Step {{ currentStep }} of {{ totalSteps }}
-        </div>
-      </div>
-    </template>
-
-    <!-- Custom skip button -->
-    <template #skip-button="{ skipLabel, onClose }">
-      <button @click="onClose" class="custom-skip-btn">
-        ✕ {{ skipLabel }}
-      </button>
-    </template>
-
-    <!-- Custom progress indicators -->
-    <template #progress="{ currentStep, totalSteps }">
-      <div class="flex space-x-1">
-        <div 
-          v-for="step in totalSteps" 
-          :key="step"
-          class="w-3 h-1 rounded-full transition-colors"
-          :class="step <= currentStep ? 'bg-green-400' : 'bg-gray-300'"
-        />
-      </div>
-    </template>
-
-    <!-- Custom action buttons -->
-    <template #actions="{ showPrevious, isLastStep, prevLabel, nextLabel, finishLabel, onPrevious, onNext }">
-      <div class="flex gap-2">
-        <button v-if="showPrevious" @click="onPrevious" class="custom-prev-btn">
-          ← {{ prevLabel }}
-        </button>
-        <button @click="onNext" class="custom-next-btn">
-          {{ isLastStep ? finishLabel : nextLabel }} →
-        </button>
-      </div>
-    </template>
-  </TourGuideManager>
-</template>
-```
-
-#### Available Slots
-
-| Slot Name | Props | Description |
-|-----------|-------|-------------|
-| `header` | `{ title, currentStep, totalSteps }` | Custom header content |
-| `content` | `{ content, currentStep, totalSteps }` | Custom main content |
-| `skip-button` | `{ skipLabel, onClose }` | Custom skip button |
-| `progress` | `{ currentStep, totalSteps }` | Custom progress indicators |
-| `actions` | `{ showPrevious, isLastStep, prevLabel, nextLabel, finishLabel, onPrevious, onNext }` | Custom action buttons |
-
-#### Gradient Backgrounds
-
-```javascript
-{
-  id: 'gradient-step',
-  title: 'Beautiful Gradients',
-  target: 'my-element',
-  backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  borderRadius: '1rem',
-  boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)'
-}
-```
-
-### Allow Interactions During Tour
-
-By default, the tour guide blocks all interactions except with highlighted elements. You can disable this behavior:
-
-```vue
-<template>
-  <TourGuideManager 
-    :steps="steps" 
-    :allow-interactions="true"
-  />
-</template>
-```
-
-**Use Cases:**
-- **Interactive tutorials** where users need to interact with other UI elements
-- **Non-blocking tours** that guide without restricting user actions
-- **Educational overlays** that provide information without interrupting workflow
-
-⚠️ **Note:** When `allowInteractions` is `true`, users can interact with any part of your application during the tour, which may cause the tour to become out of sync if users navigate away or modify the UI state.
 
 ## Advanced Features
 
 ### Separate Tooltip Positioning
 
-You can highlight one element while positioning the tooltip relative to a different element:
+Highlight one element while positioning the tooltip relative to a different element:
 
 ```javascript
 {
   id: 'complex-step',
   title: 'Advanced Feature',
   content: 'This highlights one element but positions tooltip elsewhere.',
-  target: '.main-button',        // Element to highlight (gets the overlay cutout)
+  target: '.main-button',        // Element to highlight
   tooltipTarget: '.tooltip-anchor', // Different element for tooltip positioning
   direction: 'right',
   showAction: true
 }
 ```
-
-**HTML Example:**
-```html
-<!-- This input will be highlighted -->
-<input type="checkbox" data-tour-guide="main-button" />
-
-<!-- But tooltip will be positioned relative to this button -->
-<button data-tour-guide="tooltip-anchor">Save</button>
-```
-
-**Use Cases:**
-- **Small UI elements** - Highlight a small checkbox but position tooltip near a larger element
-- **Complex layouts** - Avoid tooltip positioning conflicts in cramped layouts  
-- **Grouped elements** - Highlight individual items but position tooltip for the whole group
-- **Better UX** - Position tooltips where they won't cover important UI elements
 
 ### Lifecycle Hooks
 
@@ -557,16 +318,10 @@ You can highlight one element while positioning the tooltip relative to a differ
   title: 'Loading Data',
   target: 'data-section',
   async beforeShow() {
-    // Load data before showing step
     await fetchData()
   },
   afterShow() {
-    // Track analytics
     analytics.track('tour_step_viewed', { step: 'data-section' })
-  },
-  async beforeHide() {
-    // Save progress
-    await saveProgress()
   }
 }
 ```
@@ -583,34 +338,7 @@ You can highlight one element while positioning the tooltip relative to a differ
 }
 ```
 
-## Styling Customization
 
-### CSS Custom Properties
-
-```css
-:root {
-  --tour-guide-tooltip-bg: #1f2937;
-  --tour-guide-tooltip-text: #ffffff;
-  --tour-guide-overlay-color: rgba(0, 0, 0, 0.5);
-  --tour-guide-highlight-radius: 8px;
-}
-```
-
-### Custom Tooltip Classes
-
-```vue
-<template>
-  <TourGuideManager :steps="steps">
-    <template #step-content="{ step, index }">
-      <div class="custom-tooltip-content">
-        <h3>{{ step.title }}</h3>
-        <p>{{ step.content }}</p>
-        <div class="step-counter">{{ index + 1 }} of {{ steps.length }}</div>
-      </div>
-    </template>
-  </TourGuideManager>
-</template>
-```
 
 ## Accessibility
 
@@ -622,23 +350,13 @@ The tour guide is built with accessibility in mind:
 - **High Contrast Mode**: Support for high contrast themes
 - **Reduced Motion**: Respects `prefers-reduced-motion` settings
 
-## Browser Support
-
-- Chrome/Edge 88+
-- Firefox 78+
-- Safari 14+
-- iOS Safari 14+
-- Android Chrome 88+
-
 ## Examples
 
 Check out the `examples/` directory for detailed usage examples:
 
 - [Basic Usage](./examples/basic-usage.vue) - Simple tour implementation
 
-## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ## License
 
