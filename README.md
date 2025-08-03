@@ -18,7 +18,7 @@ A comprehensive Vue 3 tour guide library with TypeScript support for Vue and Nux
 ## Installation
 
 ```bash
-npm install vue-tour-guide
+npm install v-tour-guide
 ```
 
 ## Live Demo
@@ -55,7 +55,7 @@ The demo showcases all the features of Vue Tour Guide including:
 </template>
 
 <script setup lang="ts">
-import { TourGuideManager, type TourGuideStep } from 'vue-tour-guide'
+import { TourGuideManager, type TourGuideStep } from 'v-tour-guide'
 
 const tourSteps: TourGuideStep[] = [
   {
@@ -87,7 +87,7 @@ const onTourComplete = () => {
 1. Create a plugin file `plugins/vue-tour-guide.client.ts`:
 
 ```typescript
-import { TourGuideManager, TourGuideTooltip } from 'vue-tour-guide'
+import { TourGuideManager, TourGuideTooltip } from 'v-tour-guide'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component('TourGuideManager', TourGuideManager)
@@ -106,7 +106,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 </template>
 
 <script setup lang="ts">
-import { useTourGuide, type TourGuideStep } from 'vue-tour-guide'
+import { useTourGuide, type TourGuideStep } from 'v-tour-guide'
 
 const { startTourGuide } = useTourGuide()
 
