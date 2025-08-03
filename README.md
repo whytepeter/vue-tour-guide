@@ -371,3 +371,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ---
 
 Made with ❤️ for the Vue.js community
+# Trigger deployment
