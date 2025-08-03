@@ -33,12 +33,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/whytepeter/vue-tour-guide.git"
+    "url": "https://github.com/whytepeter/v-tour-guide.git"
   },
   "bugs": {
-    "url": "https://github.com/whytepeter/vue-tour-guide/issues"
+    "url": "https://github.com/whytepeter/v-tour-guide/issues"
   },
-  "homepage": "https://github.com/whytepeter/vue-tour-guide#readme",
+  "homepage": "https://github.com/whytepeter/v-tour-guide#readme",
   "peerDependencies": {
     "vue": "^3.3.0"
   },

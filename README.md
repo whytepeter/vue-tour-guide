@@ -23,7 +23,7 @@ npm install v-tour-guide
 
 ## Live Demo
 
-🎮 **Try it out**: [Live Demo](https://whytepeter.github.io/vue-tour-guide/)
+🎮 **Try it out**: [Live Demo](https://whytepeter.github.io/v-tour-guide/)
 
 The demo showcases all the features of Vue Tour Guide including:
 - Interactive tour steps
@@ -84,7 +84,7 @@ const onTourComplete = () => {
 
 ### Nuxt 3 Application
 
-1. Create a plugin file `plugins/vue-tour-guide.client.ts`:
+1. Create a plugin file `plugins/v-tour-guide.client.ts`:
 
 ```typescript
 import { TourGuideManager, TourGuideTooltip } from 'v-tour-guide'
@@ -122,7 +122,7 @@ The package includes Tailwind CSS via CDN by default. If you're using your own T
 
 ```typescript
 // Import without Tailwind CDN
-import 'vue-tour-guide/dist/style.css'
+import 'v-tour-guide/dist/style.css'
 ```
 
 ## API Reference
@@ -632,11 +632,9 @@ The tour guide is built with accessibility in mind:
 
 ## Examples
 
-Check out the `examples/` directory for more detailed usage examples:
+Check out the `examples/` directory for detailed usage examples:
 
 - [Basic Usage](./examples/basic-usage.vue) - Simple tour implementation
-- [Advanced Features](./examples/advanced-features.vue) - Complex scenarios
-- [Nuxt Integration](./examples/nuxt-example.vue) - Nuxt-specific setup
 
 ## Contributing
 
@@ -648,9 +646,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- 📖 [Documentation](https://vue-tour-guide.dev)
-- 🐛 [Issue Tracker](https://github.com/whytepeter/vue-tour-guide/issues)
-- 💬 [Discussions](https://github.com/whytepeter/vue-tour-guide/discussions)
+- 📖 [Documentation](https://github.com/whytepeter/v-tour-guide)
+- 🐛 [Issue Tracker](https://github.com/whytepeter/v-tour-guide/issues)
+- 💬 [Discussions](https://github.com/whytepeter/v-tour-guide/discussions)
 
 ---
 

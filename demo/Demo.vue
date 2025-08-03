@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-8">
     <!-- Floating GitHub link -->
     <a
-      href="https://github.com/whytepeter/vue-tour-guide"
+      href="https://github.com/whytepeter/v-tour-guide"
       target="_blank"
       class="size-12 flex items-center justify-center fixed top-4 right-4 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
     >

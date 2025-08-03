@@ -6,7 +6,7 @@
         Vue Tour Guide Example
       </h1>
       <p class="text-gray-600">
-        This example demonstrates the basic usage of vue-tour-guide.
+        This example demonstrates the basic usage of v-tour-guide.
       </p>
     </div>
 
@@ -133,7 +133,7 @@ import {
   useTourGuide,
   type TourGuideStep,
   type TourGuideLabels,
-} from "vue-tour-guide";
+} from "v-tour-guide";
 
 // Tour Guide Composable
 const { resetTourGuide: resetTourState } = useTourGuide();

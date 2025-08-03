@@ -11,7 +11,7 @@ export default defineConfig(({ command, mode }) => {
     // Demo configuration for GitHub Pages
     return {
       plugins: [vue()],
-      base: "/vue-tour-guide/", // GitHub Pages base path
+      base: "/v-tour-guide/", // GitHub Pages base path
       build: {
         outDir: "dist-demo",
         rollupOptions: {

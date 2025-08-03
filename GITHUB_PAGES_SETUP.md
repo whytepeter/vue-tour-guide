@@ -40,7 +40,7 @@ The demo will be automatically deployed when you:
 
 Once deployed, your demo will be available at:
 ```
-https://[your-username].github.io/vue-tour-guide/
+https://[your-username].github.io/v-tour-guide/
 ```
 
 ## Troubleshooting
