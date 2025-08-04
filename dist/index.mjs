@@ -1,6 +1,6 @@
 import { defineComponent as ce, useCssVars as Te, computed as T, createElementBlock as w, createCommentVNode as M, openBlock as g, normalizeStyle as W, normalizeClass as X, createElementVNode as Y, renderSlot as C, toDisplayString as K, Fragment as ae, createTextVNode as Le, renderList as $e, reactive as Pe, onMounted as fe, readonly as se, ref as y, onUnmounted as xe, watch as te, nextTick as q, createBlock as Be, Teleport as Ae, createVNode as He, createSlots as Ge, withCtx as N, normalizeProps as F, guardReactiveProps as V } from "vue";
 const Ie = {
-  class: "relative",
+  class: "relative space-y-2",
   style: { padding: "0" }
 }, Oe = {
   key: 0,
@@ -49,8 +49,8 @@ const Ie = {
   emits: ["close", "next", "previous"],
   setup(x) {
     Te((o) => ({
-      "24ce2094": s.skipButtonHoverColor,
-      "47a0fa16": s.buttonHoverColor
+      f7aa20b4: s.skipButtonHoverColor,
+      "5862ab07": s.buttonHoverColor
     }));
     const s = x, B = T(() => s.currentStep >= s.totalSteps), d = T(() => (o) => {
       const p = o <= s.currentStep, n = Math.abs(o - s.currentStep);
@@ -133,10 +133,7 @@ const Ie = {
       }, null, 6),
       Y("div", Ie, [
         Y("div", {
-          class: X([
-            "flex items-start justify-between gap-3 mb-2",
-            s.headerClass
-          ])
+          class: X(["flex items-start justify-between gap-3 ", s.headerClass])
         }, [
           C(o.$slots, "header", {
             title: o.title,
@@ -161,7 +158,7 @@ const Ie = {
         o.content || o.$slots.default ? (g(), w("div", {
           key: 0,
           class: X([
-            "opacity-90 font-thin leading-4 break-words mb-3",
+            "opacity-90 font-thin leading-4 break-words",
             s.contentClass
           ])
         }, [
@@ -226,7 +223,7 @@ const Ie = {
   for (const [d, E] of s)
     B[d] = E;
   return B;
-}, Ne = /* @__PURE__ */ ze(Re, [["__scopeId", "data-v-1b7f90a2"]]), c = Pe({
+}, Ne = /* @__PURE__ */ ze(Re, [["__scopeId", "data-v-d62e1b15"]]), c = Pe({
   isActive: !1,
   currentStep: 0,
   completedSteps: [],

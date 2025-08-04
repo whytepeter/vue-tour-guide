@@ -1,3 +1,4 @@
+import { Ref } from 'vue';
 /**
  * TourGuideStep Interface
  *
@@ -201,5 +202,29 @@ export interface UseTourGuideReturn {
     loadTourGuideState: () => void;
     /** Save state to localStorage */
     saveTourGuideState: () => void;
+}
+/**
+ * TourGuideManager Ref Interface
+ *
+ * Type definition for the TourGuideManager component when used with template refs.
+ * This allows proper TypeScript inference when using refs.
+ */
+export interface TourGuideManagerRef {
+    /** Start the tour guide programmatically */
+    startTourGuide: () => void;
+    /** Skip/stop the tour guide */
+    skipTourGuide: () => void;
+    /** Complete the tour guide */
+    completeTourGuide: () => void;
+    /** Navigate to the next step */
+    nextStep: () => void;
+    /** Navigate to the previous step */
+    previousStep: () => void;
+    /** Navigate to a specific step by index */
+    goToStep: (stepIndex: number) => void;
+    /** Readonly reactive reference to whether tour is active */
+    isActive: Readonly<Ref<boolean>>;
+    /** Readonly reactive reference to current step index */
+    currentStepIndex: Readonly<Ref<number>>;
 }
 //# sourceMappingURL=index.d.ts.map
