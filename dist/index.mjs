@@ -1,5 +1,5 @@
-import { defineComponent as ce, useCssVars as Te, computed as T, createElementBlock as w, createCommentVNode as M, openBlock as g, normalizeStyle as W, normalizeClass as X, createElementVNode as Y, renderSlot as C, toDisplayString as K, Fragment as ae, createTextVNode as Le, renderList as $e, reactive as Pe, onMounted as fe, readonly as se, ref as y, onUnmounted as xe, watch as te, nextTick as q, createBlock as Be, Teleport as Ae, createVNode as He, createSlots as Ge, withCtx as N, normalizeProps as F, guardReactiveProps as V } from "vue";
-const Ie = {
+import { defineComponent as ce, useCssVars as Te, computed as T, createElementBlock as w, createCommentVNode as M, openBlock as g, normalizeStyle as W, normalizeClass as X, createElementVNode as Y, renderSlot as C, toDisplayString as K, Fragment as ae, createTextVNode as Le, renderList as $e, reactive as Pe, onMounted as fe, readonly as se, ref as y, onUnmounted as xe, watch as te, nextTick as q, createBlock as Be, Teleport as Ae, createVNode as Ie, createSlots as He, withCtx as N, normalizeProps as F, guardReactiveProps as V } from "vue";
+const Ge = {
   class: "relative space-y-2",
   style: { padding: "0" }
 }, Oe = {
@@ -85,7 +85,7 @@ const Ie = {
         maxWidth: s.maxWidth,
         boxShadow: s.boxShadow
       };
-    }), H = T(() => {
+    }), I = T(() => {
       switch (s.direction) {
         case "top":
           return "arrow-top";
@@ -110,7 +110,7 @@ const Ie = {
         o.transform = `translateY(calc(-50% + ${p}px)) rotate(45deg)`;
       }
       return o;
-    }), G = T(() => ({
+    }), H = T(() => ({
       backgroundColor: s.buttonBackgroundColor,
       color: s.buttonTextColor,
       "--hover-bg": s.buttonHoverColor
@@ -128,10 +128,10 @@ const Ie = {
       style: W(E.value)
     }, [
       Y("div", {
-        class: X(["arrow-base", H.value]),
+        class: X(["arrow-base", I.value]),
         style: W(k.value)
       }, null, 6),
-      Y("div", Ie, [
+      Y("div", Ge, [
         Y("div", {
           class: X(["flex items-start justify-between gap-3 ", s.headerClass])
         }, [
@@ -204,13 +204,13 @@ const Ie = {
                 type: "button",
                 onClick: p[1] || (p[1] = (n) => o.$emit("previous")),
                 class: "text-xs px-2 py-1 rounded-md transition-colors flex-shrink-0 custom-action-btn whitespace-nowrap",
-                style: W(G.value)
+                style: W(H.value)
               }, K(o.prevLabel), 5)) : M("", !0),
               Y("button", {
                 type: "button",
                 onClick: p[2] || (p[2] = (n) => o.$emit("next")),
                 class: "text-xs px-2 py-1 rounded-md transition-colors flex-shrink-0 custom-action-btn whitespace-nowrap",
-                style: W(G.value)
+                style: W(H.value)
               }, K(B.value ? o.finishLabel : o.nextLabel), 5)
             ], 64))
           ])
@@ -245,11 +245,11 @@ const Ie = {
     c.completedSteps.includes(f) || (c.completedSteps.push(f), s());
   }, E = (f) => {
     c.currentStep = f, s();
-  }, H = () => {
+  }, I = () => {
     c.isActive = !1, c.hasSeenTourGuide = !0, s();
   }, k = () => {
     c.isActive = !1, c.currentStep = 0, c.completedSteps = [], c.hasSeenTourGuide = !1, s();
-  }, G = (f) => c.completedSteps.includes(f);
+  }, H = (f) => c.completedSteps.includes(f);
   return fe(() => {
     x();
   }), {
@@ -259,9 +259,9 @@ const Ie = {
     startTourGuide: B,
     completeStep: v,
     updateCurrentStep: E,
-    finishTourGuide: H,
+    finishTourGuide: I,
     resetTourGuide: k,
-    isStepCompleted: G,
+    isStepCompleted: H,
     // Helpers
     loadTourGuideState: x,
     saveTourGuideState: s
@@ -286,18 +286,18 @@ const Ie = {
       next: "Next",
       previous: "Previous",
       finish: "Finish"
-    }, H = T(() => ({
+    }, I = T(() => ({
       ...E,
       ...v.labels
     })), k = B, {
-      completeStep: G,
+      completeStep: H,
       finishTourGuide: f,
       startTourGuide: o,
       updateCurrentStep: p
     } = Fe(), n = y(!1), i = y(0), r = y(null), L = y(null), m = y(), R = y(null), D = y(null), S = y({
       width: 0,
       height: 0
-    }), re = y("bottom"), ie = y(0), j = y(null), J = y(null), I = y(null), t = T(() => v.steps[i.value]), he = T(() => {
+    }), re = y("bottom"), ie = y(0), j = y(null), J = y(null), G = y(null), t = T(() => v.steps[i.value]), he = T(() => {
       if (!r.value || !t.value || !R.value)
         return {};
       const e = R.value, l = v.highlightPadding, a = t.value.radius ?? 8, u = e.top - l, b = e.left - l, A = e.width + l * 2, d = e.height + l * 2;
@@ -307,6 +307,7 @@ const Ie = {
         width: `${A}px`,
         height: `${d}px`,
         borderRadius: `${a}px`,
+        zIndex: 9998,
         // Massive box-shadow creates the dimming overlay around the cut-out
         boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5)"
       };
@@ -393,6 +394,7 @@ const Ie = {
       ), {
         top: `${$}px`,
         left: `${P}px`,
+        zIndex: 9999,
         transform: "none"
         // We handle positioning directly now
       };
@@ -442,13 +444,13 @@ const Ie = {
         // Attribute changes
         attributeFilter: ["style", "class"]
         // Focus on styling changes
-      }), typeof ResizeObserver < "u" && (I.value = new ResizeObserver(() => {
+      }), typeof ResizeObserver < "u" && (G.value = new ResizeObserver(() => {
         h();
-      }), I.value.observe(r.value), m.value && I.value.observe(m.value));
+      }), G.value.observe(r.value), m.value && G.value.observe(m.value));
     }, Q = () => {
       window.removeEventListener("scroll", h), document.removeEventListener("scroll", h), window.removeEventListener("resize", h), r.value && ne(r.value).forEach((l) => {
         l.removeEventListener("scroll", h);
-      }), Se(), J.value && (J.value.disconnect(), J.value = null), I.value && (I.value.disconnect(), I.value = null);
+      }), Se(), J.value && (J.value.disconnect(), J.value = null), G.value && (G.value.disconnect(), G.value = null);
     }, de = (e) => {
       let l = document.querySelector(e);
       return l || (l = document.querySelector(
@@ -486,18 +488,18 @@ const Ie = {
         height: m.value.offsetHeight || 200
       }), t.value?.beforeShow && await t.value.beforeShow(), k("start"), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow());
     }, oe = async () => {
-      t.value && G(t.value.id), t.value?.beforeHide && await t.value.beforeHide(), i.value < v.steps.length - 1 ? (i.value++, p(i.value), await q(), await U(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow()) : pe();
+      t.value && H(t.value.id), t.value?.beforeHide && await t.value.beforeHide(), i.value < v.steps.length - 1 ? (i.value++, p(i.value), await q(), await U(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow()) : pe();
     }, le = async () => {
       i.value > 0 && (t.value?.beforeHide && await t.value.beforeHide(), i.value--, p(i.value), await q(), await U(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow());
     }, Z = () => {
       r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, r.value = null, L.value = null, R.value = null, D.value = null, S.value = { width: 0, height: 0 }, f(), k("skip");
     }, pe = () => {
-      t.value && G(t.value.id), r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, r.value = null, L.value = null, R.value = null, D.value = null, S.value = { width: 0, height: 0 }, f(), k("complete");
+      t.value && H(t.value.id), r.value && (r.value.style.removeProperty("z-index"), r.value.style.removeProperty("position"), r.value.style.removeProperty("border-radius"), r.value.style.removeProperty("pointer-events"), r.value.style.removeProperty("isolation"), r.value.removeAttribute("data-tour-guide-interactive")), Q(), v.allowInteractions || document.body.classList.remove("tour-guide-active"), n.value = !1, r.value = null, L.value = null, R.value = null, D.value = null, S.value = { width: 0, height: 0 }, f(), k("complete");
     }, Ce = async (e) => {
       if (e >= 0 && e < v.steps.length) {
         for (let l = 0; l <= e; l++) {
           const a = v.steps[l];
-          a && G(a.id);
+          a && H(a.id);
         }
         i.value = e, p(i.value), await q(), await U(), t.value?.beforeShow && await t.value.beforeShow(), k("step-change", t.value, i.value), t.value?.afterShow && t.value.afterShow();
       }
@@ -522,7 +524,7 @@ const Ie = {
           S.value = {
             width: e.offsetWidth || 320,
             height: e.offsetHeight || 200
-          }, I.value && I.value.observe(e);
+          }, G.value && G.value.observe(e);
         });
       },
       { immediate: !0 }
@@ -538,7 +540,7 @@ const Ie = {
     }), (e, l) => (g(), w("div", null, [
       n.value && r.value ? (g(), w("div", {
         key: 0,
-        style: W([he.value, { "z-index": "9998" }]),
+        style: W(he.value),
         class: "fixed pointer-events-none"
       }, null, 4)) : M("", !0),
       (g(), Be(Ae, { to: "body" }, [
@@ -546,11 +548,11 @@ const Ie = {
           key: 0,
           ref_key: "tooltipRef",
           ref: m,
-          style: W([be.value, { "z-index": "9999" }]),
+          style: W(be.value),
           class: "fixed",
           "data-tour-guide-interactive": "true"
         }, [
-          He(Ne, {
+          Ie(Ne, {
             visible: n.value,
             title: t.value?.title,
             content: t.value?.content,
@@ -564,10 +566,10 @@ const Ie = {
             onNext: oe,
             onPrevious: le,
             onClose: Z,
-            skipLabel: t.value?.skipLabel || H.value.skip,
-            nextLabel: t.value?.nextLabel || H.value.next,
-            prevLabel: t.value?.prevLabel || H.value.previous,
-            finishLabel: t.value?.finishLabel || H.value.finish,
+            skipLabel: t.value?.skipLabel || I.value.skip,
+            nextLabel: t.value?.nextLabel || I.value.next,
+            prevLabel: t.value?.prevLabel || I.value.previous,
+            finishLabel: t.value?.finishLabel || I.value.finish,
             backgroundColor: t.value?.tooltip?.backgroundColor,
             textColor: t.value?.tooltip?.textColor,
             borderRadius: t.value?.tooltip?.borderRadius,
@@ -585,7 +587,7 @@ const Ie = {
             headerClass: t.value?.tooltip?.headerClass,
             contentClass: t.value?.tooltip?.contentClass,
             actionsClass: t.value?.tooltip?.actionsClass
-          }, Ge({ _: 2 }, [
+          }, He({ _: 2 }, [
             e.$slots.default ? {
               name: "default",
               fn: N((a) => [
