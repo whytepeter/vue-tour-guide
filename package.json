@@ -11,7 +11,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./style.css": "./dist/index.css"
+    "./style.css": "./dist/v-tour-guide.css"
   },
   "files": [
     "dist"

@@ -21,6 +21,44 @@ A comprehensive Vue 3 tour guide library with TypeScript support for Vue and Nux
 npm install v-tour-guide
 ```
 
+## CSS Import
+
+**Important**: You need to import the tour guide CSS for proper styling (arrows, animations, etc.):
+
+### Option 1: Import in your plugin (Recommended)
+
+```typescript
+// plugins/v-tour-guide.client.ts
+import { TourGuideManager, TourGuideTooltip } from 'v-tour-guide'
+import 'v-tour-guide/style.css' // Add this line
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.component('TourGuideManager', TourGuideManager)
+  nuxtApp.vueApp.component('TourGuideTooltip', TourGuideTooltip)
+})
+```
+
+### Option 2: Import in your component
+
+```vue
+<script setup lang="ts">
+import { useTourGuide, type TourGuideStep } from 'v-tour-guide'
+import 'v-tour-guide/style.css' // Add this line
+</script>
+```
+
+### Option 3: Add to Nuxt config
+
+```typescript
+// nuxt.config.ts
+export default defineNuxtConfig({
+  css: [
+    'v-tour-guide/style.css'
+  ],
+  // ... rest of your config
+})
+```
+
 ## Live Demo
 
 🎮 **Try it out**: [Live Demo](https://whytepeter.github.io/v-tour-guide/)
