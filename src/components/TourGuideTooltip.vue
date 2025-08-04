@@ -12,13 +12,10 @@
     <div :class="['arrow-base', arrowDirectionClass]" :style="arrowStyle"></div>
 
     <!-- Content -->
-    <div class="relative" :style="{ padding: '0' }">
+    <div class="relative space-y-2" :style="{ padding: '0' }">
       <!-- Header with Skip button -->
       <div
-        :class="[
-          'flex items-start justify-between gap-3 mb-2',
-          props.headerClass,
-        ]"
+        :class="['flex items-start justify-between gap-3 ', props.headerClass]"
       >
         <slot
           name="header"
@@ -51,7 +48,7 @@
       <div
         v-if="content || $slots.default"
         :class="[
-          'opacity-90 font-thin leading-4 break-words mb-3',
+          'opacity-90 font-thin leading-4 break-words',
           props.contentClass,
         ]"
       >
