@@ -41,8 +41,8 @@
 /* 
  * Ensure tooltips and overlays are always interactive
  */
-.tour-guide-active .z-\[35\],
-.tour-guide-active .z-\[70\] {
+.tour-guide-active [style*="z-index: 9998"],
+.tour-guide-active [style*="z-index: 9999"] {
   pointer-events: auto;
 }
 
@@ -93,8 +93,8 @@
  */
 @media print {
   .tour-guide-active,
-  .z-\[35\],
-  .z-\[70\],
+  [style*="z-index: 9998"],
+  [style*="z-index: 9999"],
   [data-tour-guide-interactive] {
     display: none !important;
   }

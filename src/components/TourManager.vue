@@ -1,38 +1,19 @@
 <template>
   <div>
-    <!-- 
-          Visual Overlay with Rounded Cut-out Effect
-          
-          Creates a dimming overlay with a rounded cut-out to highlight the target element.
-          Uses box-shadow technique: positioned exactly over the target with a massive
-          box-shadow extending outward to cover the entire viewport.
-          
-          Z-index: 35 (below tooltip at 70, above most content)
-          Pointer events: none (allows interaction with highlighted content)
-        -->
     <div
       v-if="isActive && currentTarget"
       :style="roundedCutoutStyle"
-      class="fixed z-[35] pointer-events-none"
+      class="fixed pointer-events-none"
+      style="z-index: 9998"
     ></div>
 
-    <!-- 
-          Tour Guide Tooltip Container
-          
-          Teleported to body to ensure:
-          - Proper z-index stacking outside container constraints
-          - Positioning relative to viewport, not parent containers
-          - No clipping by overflow:hidden containers
-          
-          The container is marked as interactive to allow tooltip interactions
-          while the global CSS blocks everything else.
-        -->
     <teleport to="body">
       <div
         v-if="isActive && currentTarget"
         ref="tooltipRef"
         :style="tooltipPositionStyle"
-        class="fixed z-[70]"
+        class="fixed"
+        style="z-index: 9999"
         data-tour-guide-interactive="true"
       >
         <TourTooltip
@@ -874,7 +855,7 @@ const updateCurrentTarget = async () => {
   // Set up element highlighting and interactivity
   // These styles ensure the target is visible above the overlay and interactive
   currentTarget.value.style.position = "relative"; // Required for z-index
-  currentTarget.value.style.zIndex = "60"; // Above overlay (z-35) and below tooltip (z-70)
+  currentTarget.value.style.zIndex = "9997"; // Above overlay (z-9998) and below tooltip (z-9999)
   currentTarget.value.style.borderRadius = "8px"; // Visual polish
   currentTarget.value.style.isolation = "isolate"; // Creates new stacking context
   currentTarget.value.setAttribute("data-tour-guide-interactive", "true"); // CSS selector for interaction
