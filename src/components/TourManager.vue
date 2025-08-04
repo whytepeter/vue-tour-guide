@@ -549,24 +549,6 @@ const tooltipPositionStyle = computed(() => {
     direction
   );
 
-  // Debug logging in development
-  if (process.env.NODE_ENV === "development") {
-    console.log("Tooltip positioning:", {
-      stepId: currentStep.value.id,
-      preferredDirection,
-      finalDirection: direction,
-      targetRect: {
-        top: rect.top,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-      },
-      tooltipSize: currentTooltipSize,
-      finalPosition: { top, left },
-      arrowOffset: arrowOffset.value,
-    });
-  }
-
   return {
     top: `${top}px`,
     left: `${left}px`,

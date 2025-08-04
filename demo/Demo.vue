@@ -342,10 +342,10 @@ const tourSteps: TourGuideStep[] = [
     // direction: "bottom",
     showAction: true,
     beforeShow: async () => {
-      console.log("About to show welcome step");
+      // About to show welcome step
     },
     afterShow: () => {
-      console.log("Welcome step is now visible");
+      // Welcome step is now visible
     },
   },
   {
@@ -434,25 +434,23 @@ const progressPercentage = computed(() => {
 
 // Tour Event Handlers
 const onTourStart = () => {
-  console.log("🎯 Tour has started!");
+  // Tour has started
 };
 
 const onTourComplete = () => {
-  console.log("✅ Tour completed successfully!");
+  // Tour completed successfully
   alert(
     "🎉 Congratulations! You've completed the tour. You're now ready to use Vue Tour Guide!"
   );
 };
 
 const onTourSkip = () => {
-  console.log("⏭️ Tour was skipped");
+  // Tour was skipped
   alert("Tour skipped. You can restart it anytime!");
 };
 
 const onStepChange = (step: TourGuideStep, index: number) => {
-  console.log(
-    `📍 Step changed to: ${step.title} (${index + 1}/${tourSteps.length})`
-  );
+  // Step changed
 };
 
 // Tour Control Methods

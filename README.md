@@ -106,7 +106,7 @@ const tourSteps: TourGuideStep[] = [
 ]
 
 const onTourComplete = () => {
-  console.log('Tour completed!')
+  // Tour completed
 }
 </script>
 ```

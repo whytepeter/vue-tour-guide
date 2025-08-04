@@ -164,10 +164,10 @@ const tourSteps: TourGuideStep[] = [
     scrollToView: true,
     showAction: true,
     beforeShow: async () => {
-      console.log("About to show welcome step");
+      // Welcome step about to show
     },
     afterShow: () => {
-      console.log("Welcome step is now visible");
+      // Welcome step is now visible
     },
   },
   {
@@ -240,23 +240,21 @@ const tourSteps: TourGuideStep[] = [
 
 // Tour Event Handlers
 const onTourStart = () => {
-  console.log("Tour has started!");
+  // Tour has started
 };
 
 const onTourComplete = () => {
-  console.log("Tour completed successfully!");
+  // Tour completed successfully
   alert("🎉 Tour completed! You're all set.");
 };
 
 const onTourSkip = () => {
-  console.log("Tour was skipped");
+  // Tour was skipped
   alert("Tour skipped. You can restart it anytime!");
 };
 
 const onStepChange = (step: TourGuideStep, index: number) => {
-  console.log(
-    `Step changed to: ${step.title} (${index + 1}/${tourSteps.length})`
-  );
+  // Step changed
 };
 
 // Tour Control Methods
