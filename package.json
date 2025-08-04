@@ -1,6 +1,6 @@
 {
   "name": "v-tour-guide",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A comprehensive Vue 3 tour guide library with TypeScript support for Vue and Nuxt applications",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
