@@ -4,7 +4,6 @@
       v-if="isActive && currentTarget"
       :style="roundedCutoutStyle"
       class="fixed pointer-events-none"
-      style="z-index: 9998"
     ></div>
 
     <teleport to="body">
@@ -13,7 +12,6 @@
         ref="tooltipRef"
         :style="tooltipPositionStyle"
         class="fixed"
-        style="z-index: 9999"
         data-tour-guide-interactive="true"
       >
         <TourTooltip
@@ -319,6 +317,7 @@ const roundedCutoutStyle = computed(() => {
     width: `${width}px`,
     height: `${height}px`,
     borderRadius: `${radius}px`,
+    zIndex: 9998,
     // Massive box-shadow creates the dimming overlay around the cut-out
     boxShadow: `0 0 0 9999px rgba(0, 0, 0, 0.5)`,
   };
@@ -533,6 +532,7 @@ const tooltipPositionStyle = computed(() => {
   return {
     top: `${top}px`,
     left: `${left}px`,
+    zIndex: 9999,
     transform: "none", // We handle positioning directly now
   };
 });
